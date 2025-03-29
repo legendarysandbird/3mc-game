@@ -16,7 +16,7 @@ config/features=PackedStringArray("4.3", "Forward Plus")
 
 [debug]
 
-gdscript/warnings/untyped_declaration=1
+gdscript/warnings/untyped_declaration=2
 
 [input]
 
