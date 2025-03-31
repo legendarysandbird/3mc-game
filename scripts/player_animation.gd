@@ -8,12 +8,15 @@ func animate() -> void:
 	if !Input.is_anything_pressed():
 		set_animation("still")
 	
-	if Input.is_action_pressed("player_left") or Input.is_action_pressed("player_right"):
+	if Input.is_action_pressed("player_left") != Input.is_action_pressed("player_right"): # Poor man's XOR
 		set_animation("walk")
-		if player.velocity.x > 0:
-			flip_h = false
-		elif player.velocity.x < 0:
-			flip_h = true
+		if player.velocity.y != 0:
+			stop()
+		if player.velocity.x != 0:
+			flip_h = player.velocity.x < 0
 		play()
 	else:
 		stop()
+
+func _process(_delta: float) -> void:
+		animate()
