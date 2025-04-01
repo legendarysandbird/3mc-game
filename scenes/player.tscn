@@ -37,7 +37,7 @@ animations = [{
 "texture": ExtResource("7_lrxu8")
 }],
 "loop": true,
-"name": &"still",
+"name": &"idle",
 "speed": 15.0
 }, {
 "frames": [{
@@ -75,8 +75,7 @@ metadata/_edit_group_ = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("player")]
 scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_tc6bn")
-animation = &"still"
-frame_progress = 0.967021
+animation = &"idle"
 script = ExtResource("6_xqplr")
 player = NodePath("..")
 
