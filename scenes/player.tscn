@@ -1,19 +1,19 @@
 [gd_scene load_steps=17 format=3 uid="uid://cj03ghl2j3ane"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_au5g1"]
-[ext_resource type="Texture2D" uid="uid://bxh0wbntv122n" path="res://Assets/01_Characters/Animations/01_Idle/Frames/01-idle-1024.png" id="2_42ulj"]
-[ext_resource type="Texture2D" uid="uid://b3u0ghefpo3wn" path="res://Assets/01_Characters/Animations/01_Idle/Frames/02-idle-1024.png" id="3_xurhf"]
-[ext_resource type="Texture2D" uid="uid://bumcsnto8n21k" path="res://Assets/01_Characters/Animations/01_Idle/Frames/03-idle-1024.png" id="4_y631u"]
-[ext_resource type="Texture2D" uid="uid://3cvli0aqt613" path="res://Assets/01_Characters/Animations/01_Idle/Frames/04-idle-1024.png" id="5_t6pfu"]
-[ext_resource type="Texture2D" uid="uid://bkkfsp304diqe" path="res://Assets/01_Characters/Animations/01_Idle/Frames/05-idle-1024.png" id="6_q58ac"]
+[ext_resource type="Texture2D" uid="uid://bxh0wbntv122n" path="res://assets/player_temp/idle/01-idle-1024.png" id="2_42ulj"]
+[ext_resource type="Texture2D" uid="uid://b3u0ghefpo3wn" path="res://assets/player_temp/idle/02-idle-1024.png" id="3_xurhf"]
+[ext_resource type="Texture2D" uid="uid://bumcsnto8n21k" path="res://assets/player_temp/idle/03-idle-1024.png" id="4_y631u"]
+[ext_resource type="Texture2D" uid="uid://3cvli0aqt613" path="res://assets/player_temp/idle/04-idle-1024.png" id="5_t6pfu"]
+[ext_resource type="Texture2D" uid="uid://bkkfsp304diqe" path="res://assets/player_temp/idle/05-idle-1024.png" id="6_q58ac"]
 [ext_resource type="Script" path="res://scripts/player_animation.gd" id="6_xqplr"]
-[ext_resource type="Texture2D" uid="uid://c5i2q0vgavhyc" path="res://Assets/01_Characters/Animations/01_Idle/Frames/06-idle-1024.png" id="7_lrxu8"]
-[ext_resource type="Texture2D" uid="uid://d31vurkgui1kb" path="res://Assets/01_Characters/Animations/02_LR/01-H34R1L355-character-LR-1024px.png" id="8_7ejap"]
-[ext_resource type="Texture2D" uid="uid://bv8tyxol2vde1" path="res://Assets/01_Characters/Animations/02_LR/02-H34R1L355-character-LR-1024px.png" id="9_cnupl"]
-[ext_resource type="Texture2D" uid="uid://dik6ocyepiqwy" path="res://Assets/01_Characters/Animations/02_LR/03-H34R1L355-character-LR-1024px.png" id="10_h7dbx"]
-[ext_resource type="Texture2D" uid="uid://cv7447t4rdl0o" path="res://Assets/01_Characters/Animations/02_LR/04-H34R1L355-character-LR-1024px.png" id="11_a1f0y"]
-[ext_resource type="Texture2D" uid="uid://dfx3u064ge7xg" path="res://Assets/01_Characters/Animations/02_LR/05-H34R1L355-character-LR-1024px.png" id="12_xyhw3"]
-[ext_resource type="Texture2D" uid="uid://76huyjy2jd2w" path="res://Assets/01_Characters/Animations/02_LR/06-H34R1L355-character-LR-1024px.png" id="13_ixrbu"]
+[ext_resource type="Texture2D" uid="uid://c5i2q0vgavhyc" path="res://assets/player_temp/idle/06-idle-1024.png" id="7_lrxu8"]
+[ext_resource type="Texture2D" uid="uid://d31vurkgui1kb" path="res://assets/player_temp/walk/01-H34R1L355-character-LR-1024px.png" id="8_7ejap"]
+[ext_resource type="Texture2D" uid="uid://bv8tyxol2vde1" path="res://assets/player_temp/walk/02-H34R1L355-character-LR-1024px.png" id="9_cnupl"]
+[ext_resource type="Texture2D" uid="uid://dik6ocyepiqwy" path="res://assets/player_temp/walk/03-H34R1L355-character-LR-1024px.png" id="10_h7dbx"]
+[ext_resource type="Texture2D" uid="uid://cv7447t4rdl0o" path="res://assets/player_temp/walk/04-H34R1L355-character-LR-1024px.png" id="11_a1f0y"]
+[ext_resource type="Texture2D" uid="uid://dfx3u064ge7xg" path="res://assets/player_temp/walk/05-H34R1L355-character-LR-1024px.png" id="12_xyhw3"]
+[ext_resource type="Texture2D" uid="uid://76huyjy2jd2w" path="res://assets/player_temp/walk/06-H34R1L355-character-LR-1024px.png" id="13_ixrbu"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tc6bn"]
 animations = [{
@@ -38,7 +38,7 @@ animations = [{
 }],
 "loop": true,
 "name": &"still",
-"speed": 20.0
+"speed": 15.0
 }, {
 "frames": [{
 "duration": 1.0,
@@ -76,7 +76,7 @@ metadata/_edit_group_ = true
 scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_tc6bn")
 animation = &"still"
-frame_progress = 0.920486
+frame_progress = 0.967021
 script = ExtResource("6_xqplr")
 player = NodePath("..")
 

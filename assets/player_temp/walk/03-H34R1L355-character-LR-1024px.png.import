@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bv8tyxol2vde1"
-path="res://.godot/imported/02-H34R1L355-character-LR-1024px.png-a19c3e5a52426e30ef51ee492ccbeb5a.ctex"
+uid="uid://dik6ocyepiqwy"
+path="res://.godot/imported/03-H34R1L355-character-LR-1024px.png-9ec0ce485db535708e29e1f3d064c90f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/01_Characters/Animations/02_LR/02-H34R1L355-character-LR-1024px.png"
-dest_files=["res://.godot/imported/02-H34R1L355-character-LR-1024px.png-a19c3e5a52426e30ef51ee492ccbeb5a.ctex"]
+source_file="res://assets/player_temp/walk/03-H34R1L355-character-LR-1024px.png"
+dest_files=["res://.godot/imported/03-H34R1L355-character-LR-1024px.png-9ec0ce485db535708e29e1f3d064c90f.ctex"]
 
 [params]
 
