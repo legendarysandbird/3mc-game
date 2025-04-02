@@ -27,3 +27,4 @@ func _physics_process(delta: float) -> void:
 		velocity.x += MOVE_SPEED
 	
 	move_and_slide()
+	
