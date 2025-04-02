@@ -65,10 +65,9 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_s5rp3"]
-size = Vector2(60, 60)
+size = Vector2(74, 146)
 
 [node name="Player" type="CharacterBody2D"]
-position = Vector2(-4, -4)
 script = ExtResource("1_au5g1")
 metadata/_edit_group_ = true
 
@@ -76,12 +75,11 @@ metadata/_edit_group_ = true
 scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_tc6bn")
 animation = &"still"
-frame_progress = 0.967021
 script = ExtResource("6_xqplr")
 player = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(34, 34)
+position = Vector2(-3, -3)
 shape = SubResource("RectangleShape2D_s5rp3")
 
 [node name="JumpTimer" type="Timer" parent="."]
