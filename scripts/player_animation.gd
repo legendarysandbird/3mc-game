@@ -2,17 +2,10 @@ extends AnimatedSprite2D
 @export var player: Node
 
 func _ready() -> void:
+	assert(is_instance_valid(player), "player_animation.gd > _ready() - player instance is not valid")
 	play()
 
 func animate() -> void:
-	if !player.is_on_floor():
-		set_animation("idle")
-		if !flip_h:
-			flip_h = Input.is_action_pressed("player_left")
-		else:
-			flip_h = Input.is_action_pressed("player_left")
-		return
-	
 	if player.velocity.x == 0 and !Input.is_anything_pressed():
 		set_animation("idle")
 		return
