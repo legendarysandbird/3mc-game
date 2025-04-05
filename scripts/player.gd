@@ -4,12 +4,22 @@ const MOVE_SPEED: float = 200.0
 const JUMP_VELOCITY: float = 400.0
 
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
+@export var rotation_speed: int = 30
 
 func _ready() -> void:
 	pass
 
+func player_rotate(delta: float) -> void:
+	var target_rotation: float = 0
+	if is_on_floor():
+		target_rotation = get_floor_normal().x
+		
+	rotation = lerp(rotation, target_rotation, delta * rotation_speed)
+	
+	
 func is_jump_eligible() -> bool:
 	return is_on_floor() and $JumpTimer.time_left == 0
+	
 
 func _physics_process(delta: float) -> void:
 	velocity.x = 0
@@ -27,4 +37,4 @@ func _physics_process(delta: float) -> void:
 		velocity.x += MOVE_SPEED
 	
 	move_and_slide()
-	
+	player_rotate(delta)
