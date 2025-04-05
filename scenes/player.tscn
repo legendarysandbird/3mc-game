@@ -64,10 +64,12 @@ animations = [{
 "speed": 20.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_s5rp3"]
-size = Vector2(74, 146)
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fdknk"]
+radius = 28.0
+height = 146.0
 
 [node name="Player" type="CharacterBody2D"]
+floor_snap_length = 5.0
 script = ExtResource("1_au5g1")
 metadata/_edit_group_ = true
 
@@ -79,8 +81,8 @@ script = ExtResource("6_xqplr")
 player = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(-3, -3)
-shape = SubResource("RectangleShape2D_s5rp3")
+position = Vector2(5, -2)
+shape = SubResource("CapsuleShape2D_fdknk")
 
 [node name="JumpTimer" type="Timer" parent="."]
 wait_time = 0.8
