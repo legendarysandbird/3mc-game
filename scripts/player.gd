@@ -1,4 +1,4 @@
-extends CharacterBody2D
+class_name Player extends CharacterBody2D
 
 const MOVE_SPEED: float = 200.0
 const JUMP_VELOCITY: float = 600.0
@@ -7,7 +7,8 @@ var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var rotation_speed: int = 30
 
 func _ready() -> void:
-	pass
+	add_to_group(Groups.PLAYER)
+	$CollisionShape2D
 
 func player_rotate(delta: float) -> void:
 	var target_rotation: float = 0
