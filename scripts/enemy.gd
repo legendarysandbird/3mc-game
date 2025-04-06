@@ -7,6 +7,9 @@ class_name Enemy extends CharacterBody2D
 
 var calculated_velocity: float
 
+func _ready() -> void:
+	add_to_group(Groups.ENEMY)
+
 func _process(delta: float) -> void:
 	calculated_velocity = calculate_velocity()
 

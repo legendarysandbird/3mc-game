@@ -8,7 +8,6 @@ var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 func _ready() -> void:
 	add_to_group(Groups.PLAYER)
-	$CollisionShape2D
 
 func player_rotate(delta: float) -> void:
 	var target_rotation: float = 0
