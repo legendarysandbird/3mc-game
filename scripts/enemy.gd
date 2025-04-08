@@ -14,14 +14,14 @@ func _process(delta: float) -> void:
 	calculated_velocity = calculate_velocity()
 
 func _physics_process(delta: float) -> void:
-	velocity.x = calculated_velocity * delta
+	velocity.x = calculated_velocity
 	move_and_slide()
 
 func calculate_velocity() -> float:
 	if not can_detect_player():
 		return 0.0
 
-	var direction: float = 1.0 if global_position.x > player.global_position.x else -1.0
+	var direction: float = -1.0 if global_position.x > player.global_position.x else 1.0
 	return direction * speed
 
 func can_detect_player() -> bool:
