@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://cnlqagmncoame"]
+[gd_scene load_steps=19 format=3 uid="uid://cnlqagmncoame"]
 
 [ext_resource type="Script" path="res://scripts/enemy.gd" id="1_jn7qj"]
 [ext_resource type="Texture2D" uid="uid://bxh0wbntv122n" path="res://assets/player_temp/idle/01-idle-1024.png" id="2_4ub55"]
@@ -68,6 +68,13 @@ animations = [{
 radius = 28.0
 height = 146.0
 
+[sub_resource type="CircleShape2D" id="CircleShape2D_648yb"]
+radius = 259.017
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1aotc"]
+radius = 27.0
+height = 144.0
+
 [node name="Enemy" type="CharacterBody2D"]
 modulate = Color(1, 0, 0, 1)
 collision_layer = 4
@@ -85,3 +92,19 @@ player = NodePath("..")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(5, -2)
 shape = SubResource("CapsuleShape2D_fdknk")
+
+[node name="DetectionDistance" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitorable = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionDistance"]
+shape = SubResource("CircleShape2D_648yb")
+
+[node name="DeathCollision" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathCollision"]
+position = Vector2(5, -2)
+shape = SubResource("CapsuleShape2D_1aotc")
