@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://c5qyrhsok7enr"
-path="res://.godot/imported/Singularity-idle-03.png-12332971994c8b3b53d2baad199629e3.ctex"
+uid="uid://cnh646loi3r4l"
+path="res://.godot/imported/Singularity-aggro-03.png-092229703e7c7ac18f9d36ce202750f9.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/enemies_temp/enemy-01_singularity/aggro/Singularity-idle-03.png"
-dest_files=["res://.godot/imported/Singularity-idle-03.png-12332971994c8b3b53d2baad199629e3.ctex"]
+source_file="res://assets/enemies_temp/enemy-01_singularity/aggro/Singularity-aggro-03.png"
+dest_files=["res://.godot/imported/Singularity-aggro-03.png-092229703e7c7ac18f9d36ce202750f9.ctex"]
 
 [params]
 
