@@ -69,6 +69,7 @@ radius = 28.0
 height = 146.0
 
 [node name="Player" type="CharacterBody2D"]
+collision_layer = 2
 floor_snap_length = 5.0
 script = ExtResource("1_au5g1")
 metadata/_edit_group_ = true
