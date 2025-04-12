@@ -1,79 +1,89 @@
 [gd_scene load_steps=19 format=3 uid="uid://cnlqagmncoame"]
 
-[ext_resource type="Script" path="res://scripts/enemy.gd" id="1_jn7qj"]
-[ext_resource type="Texture2D" uid="uid://bxh0wbntv122n" path="res://assets/player_temp/idle/01-idle-1024.png" id="2_4ub55"]
-[ext_resource type="Texture2D" uid="uid://b3u0ghefpo3wn" path="res://assets/player_temp/idle/02-idle-1024.png" id="3_i0tgb"]
-[ext_resource type="Texture2D" uid="uid://bumcsnto8n21k" path="res://assets/player_temp/idle/03-idle-1024.png" id="4_7icuc"]
-[ext_resource type="Texture2D" uid="uid://3cvli0aqt613" path="res://assets/player_temp/idle/04-idle-1024.png" id="5_hv3tb"]
-[ext_resource type="Texture2D" uid="uid://bkkfsp304diqe" path="res://assets/player_temp/idle/05-idle-1024.png" id="6_ih8vl"]
-[ext_resource type="Texture2D" uid="uid://c5i2q0vgavhyc" path="res://assets/player_temp/idle/06-idle-1024.png" id="7_x8vj4"]
-[ext_resource type="Texture2D" uid="uid://d31vurkgui1kb" path="res://assets/player_temp/walk/01-H34R1L355-character-LR-1024px.png" id="8_q6mpu"]
-[ext_resource type="Texture2D" uid="uid://bv8tyxol2vde1" path="res://assets/player_temp/walk/02-H34R1L355-character-LR-1024px.png" id="9_5jv3k"]
-[ext_resource type="Texture2D" uid="uid://dik6ocyepiqwy" path="res://assets/player_temp/walk/03-H34R1L355-character-LR-1024px.png" id="10_mqw3b"]
-[ext_resource type="Texture2D" uid="uid://cv7447t4rdl0o" path="res://assets/player_temp/walk/04-H34R1L355-character-LR-1024px.png" id="11_1111u"]
-[ext_resource type="Texture2D" uid="uid://dfx3u064ge7xg" path="res://assets/player_temp/walk/05-H34R1L355-character-LR-1024px.png" id="12_daan2"]
-[ext_resource type="Texture2D" uid="uid://76huyjy2jd2w" path="res://assets/player_temp/walk/06-H34R1L355-character-LR-1024px.png" id="13_bvnx8"]
-[ext_resource type="Script" path="res://scripts/player_animation.gd" id="14_ojxe6"]
+[ext_resource type="Script" path="res://scripts/enemy/enemy.gd" id="1_jn7qj"]
+[ext_resource type="Texture2D" uid="uid://w1uqcrfpbwa0" path="res://assets/enemies_temp/enemy-01_singularity/idle/Singularity-idle-01.png" id="8_6w8d1"]
+[ext_resource type="Texture2D" uid="uid://biww51sikbddw" path="res://assets/enemies_temp/enemy-01_singularity/idle/Singularity-idle-02.png" id="9_btwad"]
+[ext_resource type="Texture2D" uid="uid://ik3sk30x1k4p" path="res://assets/enemies_temp/enemy-01_singularity/idle/Singularity-idle-03.png" id="10_7ukgf"]
+[ext_resource type="Texture2D" uid="uid://dwd7qicvb63ny" path="res://assets/enemies_temp/enemy-01_singularity/idle/Singularity-idle-04.png" id="11_kwa08"]
+[ext_resource type="Texture2D" uid="uid://d1juvqb3dbpss" path="res://assets/enemies_temp/enemy-01_singularity/idle/Singularity-idle-05.png" id="12_ov0go"]
+[ext_resource type="Texture2D" uid="uid://cehniqydpave1" path="res://assets/enemies_temp/enemy-01_singularity/idle/Singularity-idle-06.png" id="13_gdfry"]
+[ext_resource type="Script" path="res://scripts/enemy/enemy_animation.gd" id="14_faaic"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wo2hx"]
+load_path = "res://.godot/imported/Singularity-aggro-01.png-70f7e48355c8e621a3592083f7679ad1.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yynqp"]
+load_path = "res://.godot/imported/Singularity-aggro-02.png-4dcccb4f2355b912e1836d4c6bfa426d.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0l4bs"]
+load_path = "res://.godot/imported/Singularity-aggro-03.png-092229703e7c7ac18f9d36ce202750f9.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qrjyh"]
+load_path = "res://.godot/imported/Singularity-aggro-04.png-21192232478feb99f9a608d1632c2d73.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_c8l66"]
+load_path = "res://.godot/imported/Singularity-aggro-05.png-50075149b34926967edc6267222b30ae.ctex"
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2518c"]
+load_path = "res://.godot/imported/Singularity-aggro-06.png-8ca00bb0e7ed52a1239cadbbf2b18dfc.ctex"
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tc6bn"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_4ub55")
+"texture": SubResource("CompressedTexture2D_wo2hx")
 }, {
 "duration": 1.0,
-"texture": ExtResource("3_i0tgb")
+"texture": SubResource("CompressedTexture2D_yynqp")
 }, {
 "duration": 1.0,
-"texture": ExtResource("4_7icuc")
+"texture": SubResource("CompressedTexture2D_0l4bs")
 }, {
 "duration": 1.0,
-"texture": ExtResource("5_hv3tb")
+"texture": SubResource("CompressedTexture2D_qrjyh")
 }, {
 "duration": 1.0,
-"texture": ExtResource("6_ih8vl")
+"texture": SubResource("CompressedTexture2D_c8l66")
 }, {
 "duration": 1.0,
-"texture": ExtResource("7_x8vj4")
+"texture": SubResource("CompressedTexture2D_2518c")
 }],
 "loop": true,
-"name": &"idle",
-"speed": 15.0
+"name": &"aggro",
+"speed": 20.0
 }, {
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("8_q6mpu")
+"texture": ExtResource("8_6w8d1")
 }, {
 "duration": 1.0,
-"texture": ExtResource("9_5jv3k")
+"texture": ExtResource("9_btwad")
 }, {
 "duration": 1.0,
-"texture": ExtResource("10_mqw3b")
+"texture": ExtResource("10_7ukgf")
 }, {
 "duration": 1.0,
-"texture": ExtResource("11_1111u")
+"texture": ExtResource("11_kwa08")
 }, {
 "duration": 1.0,
-"texture": ExtResource("12_daan2")
+"texture": ExtResource("12_ov0go")
 }, {
 "duration": 1.0,
-"texture": ExtResource("13_bvnx8")
+"texture": ExtResource("13_gdfry")
 }],
 "loop": true,
-"name": &"walk",
-"speed": 20.0
+"name": &"idle",
+"speed": 10.0
 }]
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fdknk"]
-radius = 28.0
-height = 146.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_gu2ut"]
+radius = 27.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_648yb"]
 radius = 259.017
 
-[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_1aotc"]
-radius = 27.0
-height = 144.0
+[sub_resource type="CircleShape2D" id="CircleShape2D_ar18r"]
+radius = 27.1662
 
 [node name="Enemy" type="CharacterBody2D"]
 modulate = Color(1, 0, 0, 1)
@@ -82,16 +92,15 @@ floor_snap_length = 5.0
 script = ExtResource("1_jn7qj")
 metadata/_edit_group_ = true
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("player")]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("enemy")]
 scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_tc6bn")
-animation = &"idle"
-script = ExtResource("14_ojxe6")
-player = NodePath("..")
+animation = &"aggro"
+script = ExtResource("14_faaic")
+enemy = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(5, -2)
-shape = SubResource("CapsuleShape2D_fdknk")
+shape = SubResource("CircleShape2D_gu2ut")
 
 [node name="DetectionDistance" type="Area2D" parent="."]
 collision_layer = 0
@@ -106,5 +115,4 @@ collision_layer = 0
 collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DeathCollision"]
-position = Vector2(5, -2)
-shape = SubResource("CapsuleShape2D_1aotc")
+shape = SubResource("CircleShape2D_ar18r")

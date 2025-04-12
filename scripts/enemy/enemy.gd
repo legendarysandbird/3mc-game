@@ -5,7 +5,6 @@ class_name Enemy extends CharacterBody2D
 @onready var player: Player = get_tree().get_first_node_in_group(Groups.PLAYER)
 @onready var detectionArea: Area2D = $DetectionDistance
 @onready var deathArea: Area2D = $DeathCollision
-var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 
 var calculated_velocity: Vector2
 var player_detected: bool
@@ -19,18 +18,16 @@ func _ready() -> void:
 	detectionArea.body_exited.connect(on_distance_detection_body_exited)
 	deathArea.body_entered.connect(on_death_detection_body_entered)
 
-func _physics_process(delta: float) -> void:
-	var x: float = calculate_horizontal_movement()
-	var y: float = 0.0 if is_on_floor() else velocity.y + gravity * delta
-
-	velocity = Vector2(x, y)
+func _physics_process(_delta: float) -> void:
+	velocity = calculate_velocity()
 	move_and_slide()
 
-func calculate_horizontal_movement() -> float:
+func calculate_velocity() -> Vector2:
 	if not player_detected:
-		return 0
+		return Vector2.ZERO
 	
-	return -speed if global_position.x > player.global_position.x else speed
+	var direction: Vector2 = (player.global_position - global_position).normalized()
+	return direction * speed
 
 func on_distance_detection_body_entered(body: Node2D) -> void:
 	check_and_set_player_detected(body, true)
