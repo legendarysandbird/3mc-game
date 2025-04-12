@@ -1,4 +1,4 @@
-[gd_scene load_steps=19 format=3 uid="uid://cnlqagmncoame"]
+[gd_scene load_steps=13 format=3 uid="uid://cnlqagmncoame"]
 
 [ext_resource type="Script" path="res://scripts/enemy/enemy.gd" id="1_jn7qj"]
 [ext_resource type="Texture2D" uid="uid://w1uqcrfpbwa0" path="res://assets/enemies_temp/enemy-01_singularity/idle/Singularity-idle-01.png" id="8_6w8d1"]
@@ -9,44 +9,26 @@
 [ext_resource type="Texture2D" uid="uid://cehniqydpave1" path="res://assets/enemies_temp/enemy-01_singularity/idle/Singularity-idle-06.png" id="13_gdfry"]
 [ext_resource type="Script" path="res://scripts/enemy/enemy_animation.gd" id="14_faaic"]
 
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_wo2hx"]
-load_path = "res://.godot/imported/Singularity-aggro-01.png-70f7e48355c8e621a3592083f7679ad1.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_yynqp"]
-load_path = "res://.godot/imported/Singularity-aggro-02.png-4dcccb4f2355b912e1836d4c6bfa426d.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_0l4bs"]
-load_path = "res://.godot/imported/Singularity-aggro-03.png-092229703e7c7ac18f9d36ce202750f9.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_qrjyh"]
-load_path = "res://.godot/imported/Singularity-aggro-04.png-21192232478feb99f9a608d1632c2d73.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_c8l66"]
-load_path = "res://.godot/imported/Singularity-aggro-05.png-50075149b34926967edc6267222b30ae.ctex"
-
-[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_2518c"]
-load_path = "res://.godot/imported/Singularity-aggro-06.png-8ca00bb0e7ed52a1239cadbbf2b18dfc.ctex"
-
 [sub_resource type="SpriteFrames" id="SpriteFrames_tc6bn"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": SubResource("CompressedTexture2D_wo2hx")
+"texture": ExtResource("8_6w8d1")
 }, {
 "duration": 1.0,
-"texture": SubResource("CompressedTexture2D_yynqp")
+"texture": ExtResource("9_btwad")
 }, {
 "duration": 1.0,
-"texture": SubResource("CompressedTexture2D_0l4bs")
+"texture": ExtResource("10_7ukgf")
 }, {
 "duration": 1.0,
-"texture": SubResource("CompressedTexture2D_qrjyh")
+"texture": ExtResource("11_kwa08")
 }, {
 "duration": 1.0,
-"texture": SubResource("CompressedTexture2D_c8l66")
+"texture": ExtResource("12_ov0go")
 }, {
 "duration": 1.0,
-"texture": SubResource("CompressedTexture2D_2518c")
+"texture": ExtResource("13_gdfry")
 }],
 "loop": true,
 "name": &"aggro",
