@@ -1,0 +1,12 @@
+[gd_scene load_steps=2 format=3 uid="uid://x2wn654nfqrq"]
+
+[ext_resource type="Script" uid="uid://dxq1rpe5fc1j" path="res://scripts/player/arm/arm.gd" id="1_q8oh2"]
+
+[node name="Arm" type="Sprite2D"]
+offset = Vector2(-7, -4)
+script = ExtResource("1_q8oh2")
+metadata/_edit_group_ = true
+
+[node name="ColorRect" type="ColorRect" parent="."]
+offset_right = 60.0
+offset_bottom = 13.0
