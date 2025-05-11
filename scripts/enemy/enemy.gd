@@ -5,6 +5,7 @@ class_name Enemy extends CharacterBody2D
 @onready var player: Player = get_tree().get_first_node_in_group(Groups.PLAYER)
 @onready var detectionArea: Area2D = $DetectionDistance
 @onready var deathArea: Area2D = $DeathCollision
+@onready var healthPool: Node = $Health
 
 var calculated_velocity: Vector2
 var player_detected: bool
