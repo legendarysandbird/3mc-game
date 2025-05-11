@@ -106,6 +106,7 @@ height = 146.0
 collision_layer = 2
 floor_snap_length = 5.0
 script = ExtResource("1_au5g1")
+projectile_speed = 600.0
 metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("player")]

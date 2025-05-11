@@ -5,8 +5,12 @@ const JUMP_VELOCITY: float = 600.0
 
 var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var rotation_speed: int = 30
+@export var projectile_speed: float = 300.0
+
+@onready var projectile_spawn_node: Node2D = $AnimatedSprite2D/RotationPoint/Arm
 
 func _ready() -> void:
+	assert(is_instance_valid(projectile_spawn_node))
 	add_to_group(Groups.PLAYER)
 
 func player_rotate(delta: float) -> void:
@@ -26,7 +30,13 @@ func _physics_process(delta: float) -> void:
 	
 	if !is_on_floor():
 		velocity.y += gravity * delta
-		
+	
+	if Input.is_action_just_pressed("fire"):
+		var spawn_position: Vector2 = projectile_spawn_node.global_position
+		var projectile_direction: Vector2 = (get_global_mouse_position() - spawn_position).normalized()
+		var projectile: Projectile = Projectile.Create(projectile_spawn_node.global_position, projectile_direction * projectile_speed)
+		get_tree().root.add_child(projectile)
+
 	if Input.is_action_pressed("player_jump") and is_jump_eligible():
 		velocity.y -= JUMP_VELOCITY
 		$JumpTimer.start()
