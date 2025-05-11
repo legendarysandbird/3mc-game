@@ -1,4 +1,4 @@
-extends AnimatedSprite2D
+extends Node2D
 @export var player_animation: Node 
 
 func _ready() -> void:
