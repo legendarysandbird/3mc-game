@@ -93,11 +93,11 @@ monitorable = false
 [node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionDistance"]
 shape = SubResource("CircleShape2D_648yb")
 
-[node name="DeathCollision" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
+[node name="Hitbox" type="Area2D" parent="."]
+collision_layer = 4
+collision_mask = 8
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DeathCollision"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Hitbox"]
 shape = SubResource("CircleShape2D_ar18r")
 
 [node name="Health" parent="." instance=ExtResource("9_ipns3")]

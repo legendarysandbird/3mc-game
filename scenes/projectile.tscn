@@ -28,8 +28,8 @@ scale_curve = SubResource("CurveTexture_c8fcr")
 color_ramp = SubResource("GradientTexture1D_c8fcr")
 
 [node name="Projectile" type="Area2D"]
-collision_layer = 0
-collision_mask = 4
+collision_layer = 8
+collision_mask = 0
 script = ExtResource("1_c8fcr")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
