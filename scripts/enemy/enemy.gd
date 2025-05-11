@@ -11,13 +11,14 @@ var calculated_velocity: Vector2
 var player_detected: bool
 
 func _ready() -> void:
-	for node: Node2D in [player, detectionArea, deathArea]:
+	for node: Node in [player, detectionArea, deathArea, healthPool]:
 		assert(is_instance_valid(node))
 
 	add_to_group(Groups.ENEMY)
 	detectionArea.body_entered.connect(on_distance_detection_body_entered)
 	detectionArea.body_exited.connect(on_distance_detection_body_exited)
 	deathArea.body_entered.connect(on_death_detection_body_entered)
+	healthPool.death.connect(on_health_pool_death)
 
 func _physics_process(_delta: float) -> void:
 	velocity = calculate_velocity()
@@ -42,4 +43,8 @@ func check_and_set_player_detected(body: Node2D, is_player_detected: bool) -> vo
 
 func on_death_detection_body_entered(body: Node2D) -> void:
 	if body.is_in_group(Groups.PLAYER):
-		print("You were hit!")
+		healthPool.change_health(-1)
+
+func on_health_pool_death() -> void:
+	print("enemy died")
+	queue_free()
