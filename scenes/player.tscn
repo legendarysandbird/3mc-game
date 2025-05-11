@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=3 uid="uid://cj03ghl2j3ane"]
+[gd_scene load_steps=28 format=3 uid="uid://cj03ghl2j3ane"]
 
 [ext_resource type="Script" uid="uid://dbj3dfskhudra" path="res://scripts/player/player.gd" id="1_au5g1"]
 [ext_resource type="Texture2D" uid="uid://6svx5ryhte6x" path="res://assets/player_temp/idle/character-IDLE-01.png" id="2_f1ej7"]
@@ -22,6 +22,7 @@
 [ext_resource type="Texture2D" uid="uid://bkkayyx3a5kbg" path="res://assets/player_temp/arm-weapon/arm-IDLE-05.png" id="20_ke2ow"]
 [ext_resource type="Texture2D" uid="uid://cv0xq3nuuyr0x" path="res://assets/player_temp/arm-weapon/arm-IDLE-06.png" id="21_ujl30"]
 [ext_resource type="PackedScene" uid="uid://dys64wtfdquec" path="res://scenes/health.tscn" id="22_a38lo"]
+[ext_resource type="PackedScene" uid="uid://dr0ep3p4p2qd" path="res://scenes/health_bar.tscn" id="23_4ni07"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tc6bn"]
 animations = [{
@@ -111,7 +112,6 @@ collision_layer = 2
 floor_snap_length = 5.0
 script = ExtResource("1_au5g1")
 projectile_speed = 600.0
-metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("player")]
 scale = Vector2(0.15, 0.15)
@@ -155,4 +155,11 @@ wait_time = 0.8
 one_shot = true
 
 [node name="Health" parent="." instance=ExtResource("22_a38lo")]
-health = 3
+health_pool = 3
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("health_pool") instance=ExtResource("23_4ni07")]
+offset_left = -32.0
+offset_top = -94.0
+offset_right = 44.0
+offset_bottom = -82.0
+health_pool = NodePath("../Health")
