@@ -4,13 +4,6 @@ class_name Health extends Node
 
 signal death
 
-func _ready() -> void:
-	pass
-
-
-func _process(_delta: float) -> void:
-	pass
-
 func change_health(value: int) -> void:
 	health = clamp(health + value, 0, maxHealth)
 	if health == 0:
