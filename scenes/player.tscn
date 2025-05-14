@@ -120,28 +120,27 @@ animation = &"idle"
 script = ExtResource("6_xqplr")
 player = NodePath("..")
 
-[node name="RotationPoint" type="Node2D" parent="AnimatedSprite2D"]
-position = Vector2(-113.333, -166.667)
-scale = Vector2(6.66667, 6.66667)
-script = ExtResource("15_oprun")
-metadata/_edit_group_ = true
-
-[node name="Arm" type="AnimatedSprite2D" parent="AnimatedSprite2D/RotationPoint"]
-position = Vector2(22, 2)
-scale = Vector2(0.15, 0.15)
+[node name="Arm" type="AnimatedSprite2D" parent="AnimatedSprite2D"]
+position = Vector2(-106.667, -146.667)
+scale = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_31cv2")
 autoplay = "default"
 frame = 2
 frame_progress = 0.505687
+centered = false
+offset = Vector2(-120, -115.334)
+script = ExtResource("15_oprun")
+metadata/_edit_group_ = true
 
-[node name="ProjectileSpawnPoint" type="Node2D" parent="AnimatedSprite2D/RotationPoint/Arm"]
-position = Vector2(190.333, -13.333)
+[node name="ProjectileSpawnPoint" type="Node2D" parent="AnimatedSprite2D/Arm"]
+position = Vector2(320, 6.66666)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(5, -2)
 shape = SubResource("CapsuleShape2D_fdknk")
 
 [node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, -1)
 collision_layer = 0
 collision_mask = 4
 metadata/_edit_group_ = true

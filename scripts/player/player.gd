@@ -7,7 +7,7 @@ var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var rotation_speed: int = 30
 @export var projectile_speed: float = 300.0
 
-@onready var projectile_spawn_node: Node2D = $AnimatedSprite2D/RotationPoint/Arm/ProjectileSpawnPoint
+@onready var projectile_spawn_node: Node2D = $AnimatedSprite2D/Arm/ProjectileSpawnPoint
 @onready var hitbox: Node2D = $Hitbox
 @onready var health_pool: Health = $Health
 
