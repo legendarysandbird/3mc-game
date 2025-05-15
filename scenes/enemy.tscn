@@ -100,6 +100,7 @@ collision_mask = 8
 shape = SubResource("CircleShape2D_ar18r")
 
 [node name="Health" parent="." instance=ExtResource("9_ipns3")]
+max_health = 5
 
 [node name="HealthBar" parent="." node_paths=PackedStringArray("health_pool") instance=ExtResource("10_8qclf")]
 offset_left = -38.0

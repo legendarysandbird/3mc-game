@@ -5,6 +5,9 @@ class_name Health extends Node
 signal death
 signal health_pool_changed
 
+func _ready() -> void:
+	assert(health_pool > 0)
+
 func change_health(value: int) -> void:
 	health_pool = clamp(health_pool + value, 0, max_health)
 	if health_pool == 0:

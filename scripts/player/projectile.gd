@@ -17,7 +17,7 @@ func _ready() -> void:
 	assert(is_instance_valid(on_screen_notifier))
 	on_screen_notifier.screen_exited.connect(on_screen_exited)
 	body_entered.connect(on_body_entered)
-	look_at(self.global_position + self.velocity)
+	look_at(global_position + velocity)
 
 func _physics_process(delta: float) -> void:
 	global_position += velocity * delta
