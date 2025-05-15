@@ -17,7 +17,7 @@ func _ready() -> void:
 	assert(is_instance_valid(on_screen_notifier))
 	on_screen_notifier.screen_exited.connect(on_screen_exited)
 	body_entered.connect(on_body_entered)
-	look_at(get_global_mouse_position())
+	look_at(self.global_position + self.velocity)
 
 func _physics_process(delta: float) -> void:
 	global_position += velocity * delta
@@ -26,5 +26,5 @@ func on_screen_exited() -> void:
 	queue_free()
 
 func on_body_entered(body: Node) -> void:
-	if body is TileMap:
+	if body is TileMapLayer:
 		queue_free()
