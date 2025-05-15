@@ -153,7 +153,6 @@ wait_time = 0.8
 one_shot = true
 
 [node name="Health" parent="." instance=ExtResource("22_a38lo")]
-health_pool = 3
 
 [node name="HealthBar" parent="." node_paths=PackedStringArray("health_pool") instance=ExtResource("23_4ni07")]
 offset_left = -32.0

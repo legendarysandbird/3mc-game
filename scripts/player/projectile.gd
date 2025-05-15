@@ -26,5 +26,5 @@ func on_screen_exited() -> void:
 	queue_free()
 
 func on_body_entered(body: Node) -> void:
-	if typeof(body) == typeof(TileMap):
+	if body is TileMap:
 		queue_free()

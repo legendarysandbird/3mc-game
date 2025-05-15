@@ -1,6 +1,6 @@
 class_name Health extends Node
-@export var health_pool: int
-@onready var max_health: int = health_pool
+@export var max_health: int
+@onready var health_pool: int = max_health
 
 signal death
 signal health_pool_changed
