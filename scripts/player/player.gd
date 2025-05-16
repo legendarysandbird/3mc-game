@@ -44,14 +44,14 @@ func player_movement(delta: float) -> void:
 		
 	if Input.is_action_pressed("player_left"):
 		velocity.x -= MOVE_SPEED
-	if Input.is_action_prissed("player_right"):
+	if Input.is_action_pressed("player_right"):
 		velocity.x += MOVE_SPEED
 		
 	move_and_slide()
 	player_rotate(delta)
 
 func player_shoot() -> void:
-	if Input.is_action_just_pressed("fire") and gun_timer.time_left == 0:
+	if Input.is_action_pressed("fire") and gun_timer.time_left == 0:
 		gun_timer.start()
 		var spawn_position: Vector2 = projectile_spawn_node.global_position
 		var projectile_direction: Vector2 = (get_global_mouse_position() - spawn_position).normalized()

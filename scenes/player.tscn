@@ -21,8 +21,8 @@
 [ext_resource type="Texture2D" uid="uid://x0c3eeeibap3" path="res://assets/player_temp/arm-weapon/arm-IDLE-04.png" id="19_l71n6"]
 [ext_resource type="Texture2D" uid="uid://bkkayyx3a5kbg" path="res://assets/player_temp/arm-weapon/arm-IDLE-05.png" id="20_ke2ow"]
 [ext_resource type="Texture2D" uid="uid://cv0xq3nuuyr0x" path="res://assets/player_temp/arm-weapon/arm-IDLE-06.png" id="21_ujl30"]
-[ext_resource type="PackedScene" uid="uid://dys64wtfdquec" path="res://scenes/health.tscn" id="22_a38lo"]
-[ext_resource type="PackedScene" uid="uid://dr0ep3p4p2qd" path="res://scenes/health_bar.tscn" id="23_4ni07"]
+[ext_resource type="PackedScene" path="res://scenes/health.tscn" id="22_a38lo"]
+[ext_resource type="PackedScene" path="res://scenes/health_bar.tscn" id="23_4ni07"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tc6bn"]
 animations = [{
