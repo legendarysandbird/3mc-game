@@ -8,9 +8,12 @@ var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 @export var projectile_speed: float = 300.0
 
 @onready var projectile_spawn_node: Node2D = $AnimatedSprite2D/RotationPoint/Arm
+@onready var gun_timer: Timer = $GunTimer
 
 func _ready() -> void:
-	assert(is_instance_valid(projectile_spawn_node))
+	for node: Node in [projectile_spawn_node, gun_timer]:
+		assert(is_instance_valid(node))
+
 	add_to_group(Groups.PLAYER)
 
 func player_rotate(delta: float) -> void:
@@ -31,7 +34,8 @@ func _physics_process(delta: float) -> void:
 	if !is_on_floor():
 		velocity.y += gravity * delta
 	
-	if Input.is_action_just_pressed("fire"):
+	if Input.is_action_pressed("fire") and gun_timer.time_left == 0:
+		gun_timer.start()
 		var spawn_position: Vector2 = projectile_spawn_node.global_position
 		var projectile_direction: Vector2 = (get_global_mouse_position() - spawn_position).normalized()
 		var projectile: Projectile = Projectile.Create(projectile_spawn_node.global_position, projectile_direction * projectile_speed)
