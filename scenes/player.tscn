@@ -1,4 +1,4 @@
-[gd_scene load_steps=25 format=3 uid="uid://cj03ghl2j3ane"]
+[gd_scene load_steps=28 format=3 uid="uid://cj03ghl2j3ane"]
 
 [ext_resource type="Script" uid="uid://dbj3dfskhudra" path="res://scripts/player/player.gd" id="1_au5g1"]
 [ext_resource type="Texture2D" uid="uid://6svx5ryhte6x" path="res://assets/player_temp/idle/character-IDLE-01.png" id="2_f1ej7"]
@@ -21,6 +21,8 @@
 [ext_resource type="Texture2D" uid="uid://x0c3eeeibap3" path="res://assets/player_temp/arm-weapon/arm-IDLE-04.png" id="19_l71n6"]
 [ext_resource type="Texture2D" uid="uid://bkkayyx3a5kbg" path="res://assets/player_temp/arm-weapon/arm-IDLE-05.png" id="20_ke2ow"]
 [ext_resource type="Texture2D" uid="uid://cv0xq3nuuyr0x" path="res://assets/player_temp/arm-weapon/arm-IDLE-06.png" id="21_ujl30"]
+[ext_resource type="PackedScene" uid="uid://dys64wtfdquec" path="res://scenes/health.tscn" id="22_a38lo"]
+[ext_resource type="PackedScene" uid="uid://dr0ep3p4p2qd" path="res://scenes/health_bar.tscn" id="23_4ni07"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tc6bn"]
 animations = [{
@@ -94,10 +96,14 @@ animations = [{
 }],
 "loop": true,
 "name": &"default",
-"speed": 5.0
+"speed": 15.0
 }]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fdknk"]
+radius = 28.0
+height = 146.0
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_i4ail"]
 radius = 28.0
 height = 146.0
 
@@ -106,7 +112,6 @@ collision_layer = 2
 floor_snap_length = 5.0
 script = ExtResource("1_au5g1")
 projectile_speed = 600.0
-metadata/_edit_group_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("player")]
 scale = Vector2(0.15, 0.15)
@@ -115,23 +120,33 @@ animation = &"idle"
 script = ExtResource("6_xqplr")
 player = NodePath("..")
 
-[node name="RotationPoint" type="Node2D" parent="AnimatedSprite2D"]
-position = Vector2(-113.333, -166.667)
-scale = Vector2(6.66667, 6.66667)
-script = ExtResource("15_oprun")
-metadata/_edit_group_ = true
-
-[node name="Arm" type="AnimatedSprite2D" parent="AnimatedSprite2D/RotationPoint"]
-position = Vector2(22, 2)
-scale = Vector2(0.15, 0.15)
+[node name="Arm" type="AnimatedSprite2D" parent="AnimatedSprite2D"]
+position = Vector2(-106.667, -146.667)
 sprite_frames = SubResource("SpriteFrames_31cv2")
 autoplay = "default"
 frame = 2
 frame_progress = 0.505687
+centered = false
+offset = Vector2(-120, -115.334)
+script = ExtResource("15_oprun")
+metadata/_edit_group_ = true
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(5, -2)
+[node name="ProjectileSpawnPoint" type="Node2D" parent="AnimatedSprite2D/Arm"]
+position = Vector2(320, 6.66666)
+
+[node name="PlayerCollision" type="CollisionShape2D" parent="."]
+position = Vector2(5, -3)
 shape = SubResource("CapsuleShape2D_fdknk")
+
+[node name="Hitbox" type="Area2D" parent="."]
+position = Vector2(0, -1)
+collision_layer = 0
+collision_mask = 4
+metadata/_edit_group_ = true
+
+[node name="HitboxCollision" type="CollisionShape2D" parent="Hitbox"]
+position = Vector2(5, -2)
+shape = SubResource("CapsuleShape2D_i4ail")
 
 [node name="JumpTimer" type="Timer" parent="."]
 wait_time = 0.8
@@ -140,3 +155,13 @@ one_shot = true
 [node name="GunTimer" type="Timer" parent="."]
 wait_time = 0.5
 one_shot = true
+
+[node name="Health" parent="." instance=ExtResource("22_a38lo")]
+max_health = 3
+
+[node name="HealthBar" parent="." node_paths=PackedStringArray("health_pool") instance=ExtResource("23_4ni07")]
+offset_left = -32.0
+offset_top = -94.0
+offset_right = 44.0
+offset_bottom = -82.0
+health_pool = NodePath("../Health")
