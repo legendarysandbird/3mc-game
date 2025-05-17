@@ -15,7 +15,7 @@ var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _ready() -> void:
 	for node: Node in [projectile_spawn_node, hitbox, health_pool, jump_timer]:
 		assert(is_instance_valid(node))
-	
+
 	hitbox.body_entered.connect(on_hitbox_body_entered)
 	health_pool.death.connect(on_health_pool_death)
 
