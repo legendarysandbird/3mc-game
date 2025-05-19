@@ -16,8 +16,7 @@ var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 func _ready() -> void:
 	for node: Node in [projectile_spawn_node, hitbox, health_pool, jump_timer, gun_timer]:
 		assert(is_instance_valid(node))
-	
-	add_to_group(Groups.PLAYER)
+
 	hitbox.body_entered.connect(on_hitbox_body_entered)
 	health_pool.death.connect(on_health_pool_death)
 
@@ -57,14 +56,13 @@ func player_shoot() -> void:
 		var projectile_direction: Vector2 = (get_global_mouse_position() - spawn_position).normalized()
 		var projectile: Projectile = Projectile.Create(projectile_spawn_node.global_position, projectile_direction * projectile_speed)
 		get_tree().root.add_child(projectile)
-		projectile.add_to_group(Groups.PLAYER_PROJECTILE)
 
 func _physics_process(delta: float) -> void:
 	player_movement(delta)
 	player_shoot()
 
 func on_hitbox_body_entered(body: Node2D) -> void:
-	if body.is_in_group(Groups.ENEMY):
+	if body is Enemy:
 		print("player hit")
 		health_pool.change_health(-1)
 
