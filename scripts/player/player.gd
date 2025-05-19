@@ -11,9 +11,10 @@ var gravity: float = ProjectSettings.get_setting("physics/2d/default_gravity")
 @onready var hitbox: Node2D = $Hitbox
 @onready var health_pool: Health = $Health
 @onready var jump_timer: Timer = $JumpTimer
+@onready var gun_timer: Timer = $GunTimer
 
 func _ready() -> void:
-	for node: Node in [projectile_spawn_node, hitbox, health_pool, jump_timer]:
+	for node: Node in [projectile_spawn_node, hitbox, health_pool, jump_timer, gun_timer]:
 		assert(is_instance_valid(node))
 	
 	add_to_group(Groups.PLAYER)
@@ -50,7 +51,8 @@ func player_movement(delta: float) -> void:
 	player_rotate(delta)
 
 func player_shoot() -> void:
-	if Input.is_action_just_pressed("fire"):
+	if Input.is_action_pressed("fire") and gun_timer.time_left == 0:
+		gun_timer.start()
 		var spawn_position: Vector2 = projectile_spawn_node.global_position
 		var projectile_direction: Vector2 = (get_global_mouse_position() - spawn_position).normalized()
 		var projectile: Projectile = Projectile.Create(projectile_spawn_node.global_position, projectile_direction * projectile_speed)

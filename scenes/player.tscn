@@ -152,6 +152,10 @@ shape = SubResource("CapsuleShape2D_i4ail")
 wait_time = 0.8
 one_shot = true
 
+[node name="GunTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+
 [node name="Health" parent="." instance=ExtResource("22_a38lo")]
 max_health = 3
 
