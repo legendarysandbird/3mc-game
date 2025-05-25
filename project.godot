@@ -14,10 +14,6 @@ config/name="3MC Game"
 run/main_scene="res://scenes/temp_level.tscn"
 config/features=PackedStringArray("4.4", "Forward Plus")
 
-[autoload]
-
-GroupsNode="*res://scripts/auto-loads/groups.gd"
-
 [debug]
 
 gdscript/warnings/unassigned_variable=2
