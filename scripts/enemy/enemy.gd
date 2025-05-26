@@ -7,6 +7,8 @@ class_name Enemy extends CharacterBody2D
 @onready var hitbox: Area2D = $Hitbox
 @onready var health_pool: Health = $Health
 
+signal death
+
 var calculated_velocity: Vector2
 var target: Player
 
@@ -17,7 +19,7 @@ func _ready() -> void:
 	detectionArea.body_entered.connect(on_distance_detection_body_entered)
 	detectionArea.body_exited.connect(on_distance_detection_body_exited)
 	hitbox.area_entered.connect(on_hitbox_area_entered)
-	health_pool.death.connect(on_health_pool_death)
+	health_pool.empty.connect(on_health_pool_empty)
 
 func _physics_process(_delta: float) -> void:
 	velocity = calculate_velocity()
@@ -45,6 +47,6 @@ func on_hitbox_area_entered(area: Node2D) -> void:
 		health_pool.change_health(area.damage)
 		area.queue_free()
 
-func on_health_pool_death() -> void:
-	print("enemy died")
+func on_health_pool_empty() -> void:
+	death.emit()
 	queue_free()

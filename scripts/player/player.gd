@@ -18,7 +18,7 @@ func _ready() -> void:
 		assert(is_instance_valid(node))
 
 	hitbox.body_entered.connect(on_hitbox_body_entered)
-	health_pool.death.connect(on_health_pool_death)
+	health_pool.empty.connect(on_health_pool_empty)
 
 func player_rotate(delta: float) -> void:
 	var target_rotation: float = 0
@@ -66,6 +66,6 @@ func on_hitbox_body_entered(body: Node2D) -> void:
 		print("player hit")
 		health_pool.change_health(-1)
 
-func on_health_pool_death() -> void:
+func on_health_pool_empty() -> void:
 	print("You died!")
 	queue_free()
