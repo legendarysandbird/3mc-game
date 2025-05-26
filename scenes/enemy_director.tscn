@@ -1,9 +1,9 @@
 [gd_scene load_steps=3 format=3 uid="uid://d0idf708cetp0"]
 
-[ext_resource type="Script" uid="uid://djmbxojglwgvi" path="res://spawn_director.gd" id="1_gro5i"]
+[ext_resource type="Script" uid="uid://djmbxojglwgvi" path="res://scripts/logic/enemy_director.gd" id="1_gro5i"]
 [ext_resource type="PackedScene" uid="uid://cnlqagmncoame" path="res://scenes/enemy.tscn" id="2_s2bkg"]
 
-[node name="SpawnDirector" type="Node"]
+[node name="EnemyDirector" type="Node"]
 script = ExtResource("1_gro5i")
 mob_array = Array[PackedScene]([ExtResource("2_s2bkg")])
 

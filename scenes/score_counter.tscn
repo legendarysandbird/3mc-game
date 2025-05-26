@@ -1,0 +1,32 @@
+[gd_scene load_steps=3 format=3 uid="uid://crfni8y6b75st"]
+
+[ext_resource type="Script" uid="uid://b722dtlyuhgwi" path="res://scripts/logic/score_counter.gd" id="1_terno"]
+
+[sub_resource type="SystemFont" id="SystemFont_t7i3n"]
+
+[node name="ScoreCounter" type="Label"]
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -4.5
+offset_top = -11.0
+offset_right = 4.5
+offset_bottom = 11.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = SubResource("SystemFont_t7i3n")
+theme_override_font_sizes/font_size = 64
+text = "0"
+script = ExtResource("1_terno")
+
+[node name="ScoreLabel" type="Label" parent="."]
+layout_mode = 0
+offset_left = -16.5
+offset_top = -15.0
+offset_right = 58.5
+offset_bottom = 24.0
+theme_override_font_sizes/font_size = 28
+text = "Score"
