@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=4 uid="uid://chvfto1w6w3um"]
+[gd_scene load_steps=9 format=4 uid="uid://chvfto1w6w3um"]
 
 [ext_resource type="PackedScene" uid="uid://cj03ghl2j3ane" path="res://scenes/player.tscn" id="1_sqah0"]
 [ext_resource type="Texture2D" uid="uid://cxlm3j5d8v1hh" path="res://assets/level/tilesheet_complete.png" id="2_ka4wd"]
 [ext_resource type="PackedScene" uid="uid://crfni8y6b75st" path="res://scenes/score_counter.tscn" id="4_7hwuv"]
 [ext_resource type="PackedScene" uid="uid://d0idf708cetp0" path="res://scenes/enemy_director.tscn" id="4_kxde3"]
+[ext_resource type="PackedScene" uid="uid://cnlqagmncoame" path="res://scenes/enemy.tscn" id="4_vcli0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qvk2k"]
 texture = ExtResource("2_ka4wd")
@@ -317,7 +318,7 @@ sources/0 = SubResource("TileSetAtlasSource_qvk2k")
 
 [sub_resource type="Curve2D" id="Curve2D_7hwuv"]
 _data = {
-"points": PackedVector2Array(0, 0, 0, 0, 184.004, 4.45369, 0, 0, 0, 0, 186.927, 220.709, 0, 0, 0, 0, 496.79, 228.467, 0, 0, 0, 0, 693.622, 496.119, 0, 0, 0, 0, 930.404, 494.179, 0, 0, 0, 0, 935.276, 13.1815, 0, 0, 0, 0, 184.004, 4.45369)
+"points": PackedVector2Array(0, 0, 0, 0, 183.03, 87.8525, 0, 0, 0, 0, 186.927, 220.709, 0, 0, 0, 0, 496.79, 228.467, 0, 0, 0, 0, 693.622, 496.119, 0, 0, 0, 0, 930.404, 494.179, 0, 0, 0, 0, 933.327, 89.792, 0, 0, 0, 0, 183.03, 87.8525)
 }
 point_count = 7
 
@@ -343,14 +344,15 @@ scale = Vector2(1.02626, 1.03119)
 curve = SubResource("Curve2D_7hwuv")
 
 [node name="SpawnNode" type="PathFollow2D" parent="Level/SpawnPath"]
-position = Vector2(184.004, 4.45369)
-rotation = 1.55728
+position = Vector2(183.03, 87.8525)
+rotation = 1.54147
 
 [node name="Player" parent="." instance=ExtResource("1_sqah0")]
 position = Vector2(386, 280)
 projectile_speed = 300.0
 
 [node name="EnemyDirector" parent="." node_paths=PackedStringArray("spawn_node") instance=ExtResource("4_kxde3")]
+mob_types = Array[PackedScene]([ExtResource("4_vcli0")])
 spawn_node = NodePath("../Level/SpawnPath/SpawnNode")
 
 [node name="ScoreCounter" parent="." node_paths=PackedStringArray("director") instance=ExtResource("4_7hwuv")]

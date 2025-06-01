@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://b722dtlyuhgwi" path="res://scripts/logic/score_counter.gd" id="1_terno"]
 
 [sub_resource type="SystemFont" id="SystemFont_t7i3n"]
+subpixel_positioning = 0
 
 [node name="ScoreCounter" type="Label"]
 anchors_preset = 8
