@@ -354,6 +354,7 @@ projectile_speed = 300.0
 [node name="EnemyDirector" parent="." node_paths=PackedStringArray("spawn_node") instance=ExtResource("4_kxde3")]
 mob_types = Array[PackedScene]([ExtResource("4_vcli0")])
 spawn_node = NodePath("../Level/SpawnPath/SpawnNode")
+max_mob_count = 5
 
 [node name="ScoreCounter" parent="." node_paths=PackedStringArray("director") instance=ExtResource("4_7hwuv")]
 offset_left = -383.0
