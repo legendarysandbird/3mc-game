@@ -23,18 +23,24 @@ func _ready() -> void:
 	
 	#Give us one enemy to start with so we aren't waiting 5 seconds
 	#Coordinates are where the debugging enemy usually is
-	add_child(create_enemy(Vector2(765, 253)))
+	add_child(create_enemy_at(Vector2(765, 253)))
 	cur_mob_count += 1
 	
-func create_enemy(pos: Vector2 = Vector2(0,0)) -> Enemy:
+func create_enemy() -> Enemy:
 	var mob_scene: PackedScene = mob_types.pick_random()
 	var mob: Enemy = mob_scene.instantiate()
 	
-	if pos:
-		mob.position = pos
-	else:
-		spawn_node.set_progress_ratio(randf())
-		mob.position = spawn_node.get_position()
+	spawn_node.set_progress_ratio(randf())
+	mob.position = spawn_node.get_position()
+	
+	mob.death.connect(on_enemy_death)
+	return mob
+	
+func create_enemy_at(pos: Vector2) -> Enemy:
+	var mob_scene: PackedScene = mob_types.pick_random()
+	var mob: Enemy = mob_scene.instantiate()
+	
+	mob.position = pos
 	
 	mob.death.connect(on_enemy_death)
 	return mob
