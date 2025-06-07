@@ -27,14 +27,8 @@ func _ready() -> void:
 	cur_mob_count += 1
 	
 func create_enemy() -> Enemy:
-	var mob_scene: PackedScene = mob_types.pick_random()
-	var mob: Enemy = mob_scene.instantiate()
-	
 	spawn_node.set_progress_ratio(randf())
-	mob.position = spawn_node.get_position()
-	
-	mob.death.connect(on_enemy_death)
-	return mob
+	return create_enemy_at(spawn_node.get_position())
 	
 func create_enemy_at(pos: Vector2) -> Enemy:
 	var mob_scene: PackedScene = mob_types.pick_random()
