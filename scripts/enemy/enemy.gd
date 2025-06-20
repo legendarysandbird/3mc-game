@@ -3,21 +3,19 @@ class_name Enemy extends CharacterBody2D
 @export var speed: float = 100.0
 @export var contact_damage: int = 1
 
-@onready var detectionArea: Area2D = $DetectionDistance
+@onready var visibility_notifier: VisibleOnScreenNotifier2D = $VisibleOnScreenNotifier2D
 @onready var hitbox: Area2D = $Hitbox
 @onready var health_pool: Health = $Health
+@onready var player: Player = get_tree().root.find_children("*", "Player", true, false)[0]
 
 signal death
 
 var calculated_velocity: Vector2
-var target: Player
 
 func _ready() -> void:
-	for node: Node in [detectionArea, hitbox, health_pool]:
+	for node: Node in [visibility_notifier, hitbox, health_pool, player]:
 		assert(is_instance_valid(node))
 
-	detectionArea.body_entered.connect(on_distance_detection_body_entered)
-	detectionArea.body_exited.connect(on_distance_detection_body_exited)
 	hitbox.area_entered.connect(on_hitbox_area_entered)
 	health_pool.empty.connect(on_health_pool_empty)
 
@@ -26,21 +24,11 @@ func _physics_process(_delta: float) -> void:
 	move_and_slide()
 
 func calculate_velocity() -> Vector2:
-	if target == null:
+	if not (visibility_notifier.is_on_screen() and is_instance_valid(player)):
 		return Vector2.ZERO
-	
-	var direction: Vector2 = (target.global_position - global_position).normalized()
+
+	var direction: Vector2 = (player.global_position - global_position).normalized()
 	return direction * speed
-
-func on_distance_detection_body_entered(body: Node2D) -> void:
-	check_and_set_player_detected(body, true)
-
-func on_distance_detection_body_exited(body: Node2D) -> void:
-	check_and_set_player_detected(body, false)
-
-func check_and_set_player_detected(body: Node2D, is_player_detected: bool) -> void:
-	if body is Player:
-		target = body if is_player_detected else null
 
 func on_hitbox_area_entered(area: Node2D) -> void:
 	if area is Projectile:
