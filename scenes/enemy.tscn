@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cnlqagmncoame"]
+[gd_scene load_steps=14 format=3 uid="uid://cnlqagmncoame"]
 
 [ext_resource type="Script" uid="uid://hmcjgj6inivy" path="res://scripts/enemy/enemy.gd" id="1_jn7qj"]
 [ext_resource type="Texture2D" uid="uid://w1uqcrfpbwa0" path="res://assets/enemies_temp/enemy-01_singularity/idle/Singularity-idle-01.png" id="8_6w8d1"]
@@ -63,9 +63,6 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_gu2ut"]
 radius = 27.0
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_648yb"]
-radius = 259.017
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_ar18r"]
 radius = 27.1662
 
@@ -84,13 +81,9 @@ enemy = NodePath("..")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_gu2ut")
 
-[node name="DetectionDistance" type="Area2D" parent="."]
-collision_layer = 0
-collision_mask = 2
-monitorable = false
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="DetectionDistance"]
-shape = SubResource("CircleShape2D_648yb")
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+position = Vector2(-0.5, 4.76837e-07)
+scale = Vector2(1.95, 1.8)
 
 [node name="Hitbox" type="Area2D" parent="."]
 collision_layer = 4
