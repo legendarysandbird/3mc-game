@@ -1,5 +1,4 @@
 extends Node
-#signal start_game
 
 
 func _ready() -> void:
