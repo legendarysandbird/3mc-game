@@ -7,4 +7,3 @@ script = ExtResource("1_gro5i")
 
 [node name="SpawnTimer" type="Timer" parent="."]
 wait_time = 5.0
-autostart = true
