@@ -12,11 +12,8 @@ func _ready() -> void:
 	button_play.pressed.connect(on_play_button_pressed)
 
 func on_play_button_pressed() -> void:
-	var my_seed: int
-	if seed_edit.text != "":
-		my_seed = seed_edit.text.hash()
-	else:
-		my_seed = randi() % 1000000
+	var seed_text: String = seed_edit.text
+	var my_seed: int = randi() % 1000000 if seed_text.is_empty() else seed_text.hash()
 	seed(my_seed)
 	seed_set.emit(my_seed)
 	

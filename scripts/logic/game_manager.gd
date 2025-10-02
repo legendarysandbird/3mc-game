@@ -1,6 +1,6 @@
 extends Node
 
-@onready var scene_temp_level: PackedScene = preload('res://scenes/temp_level.tscn')
+@onready var scene_temp_level: PackedScene = preload('uid://chvfto1w6w3um')
 @onready var main_menu: Control = $"Main Menu"
 
 @onready var game_info: Dictionary = {"current_seed": 0}
