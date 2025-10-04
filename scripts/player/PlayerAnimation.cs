@@ -2,8 +2,6 @@ using Godot;
 
 public partial class PlayerAnimation : AnimatedSprite2D
 {
-	[Export] private Node _player;
-
 	private float _xScaleCache;
 	
 	public override void _Ready()

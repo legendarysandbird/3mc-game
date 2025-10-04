@@ -4,11 +4,11 @@ using System.Diagnostics;
 [GlobalClass]
 public partial class EnemyDirector : Node
 {
-	[Export] private Godot.Collections.Array<PackedScene> _mobTypes;
-	[Export] private PathFollow2D _spawnNode;
+	[Export] private Godot.Collections.Array<PackedScene>? _mobTypes;
+	[Export] private PathFollow2D? _spawnNode;
 	[Export] private int _maxMobCount;
 
-	private Timer _spawnTimer;
+	private Timer? _spawnTimer;
 	private int _curMobCount;
 
 
@@ -16,10 +16,13 @@ public partial class EnemyDirector : Node
 
 	public override void _Ready()
 	{
+		_mobTypes.NotNull(nameof(_mobTypes));
+		_spawnNode.NotNull(nameof(_spawnNode));
+
 		Debug.Assert(_maxMobCount > 0);
 		Debug.Assert(_curMobCount == 0);
 	
-		_spawnTimer = GetNode<Timer>("SpawnTimer");
+		_spawnTimer = GetNode<Timer>("SpawnTimer").NotNull(nameof(_spawnTimer));
 		_spawnTimer.Timeout += OnSpawnTimerTimeout;
 
 		// Give us one enemy to start with so we aren't waiting 5 seconds
@@ -32,12 +35,16 @@ public partial class EnemyDirector : Node
 
 	private Enemy CreateEnemy()
 	{
+		_spawnNode.NotNull(nameof(_spawnNode));
+
 		_spawnNode.ProgressRatio = GD.Randf();
 		return CreateEnemyAt(_spawnNode.Position);
 	}
 
 	private Enemy CreateEnemyAt(Vector2 pos)
 	{
+		_mobTypes.NotNull(nameof(_mobTypes));
+	
 		PackedScene mobScene = _mobTypes.PickRandom();
 		Enemy mob = mobScene.Instantiate<Enemy>();
 		mob.Position = pos;

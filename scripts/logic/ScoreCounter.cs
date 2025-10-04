@@ -2,12 +2,14 @@ using Godot;
 
 public partial class ScoreCounter : Label
 {
-	[Export] private EnemyDirector _enemyDirector;
+	[Export] private EnemyDirector? _enemyDirector;
 
 	private int _score;
 
 	public override void _Ready()
 	{
+		_enemyDirector.NotNull(nameof(_enemyDirector));
+
 		_enemyDirector.EnemyDeath += OnEnemyDeath;
 
 		Text = _score.ToString();

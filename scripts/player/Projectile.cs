@@ -6,7 +6,7 @@ public partial class Projectile : Area2D
 	private static readonly PackedScene _projectileScene = GD.Load<PackedScene>("uid://da4rvan0yy3eh");
 
 	private Vector2 _velocity;
-	private VisibleOnScreenNotifier2D _onScreenNotifier;
+	private VisibleOnScreenNotifier2D? _onScreenNotifier;
 
 	public int Damage;
 
@@ -22,7 +22,7 @@ public partial class Projectile : Area2D
 	
 	public override void _Ready()
 	{
-		_onScreenNotifier = GetNode<VisibleOnScreenNotifier2D>("VisibleOnScreenNotifier2D");
+		_onScreenNotifier = GetNode<VisibleOnScreenNotifier2D>("VisibleOnScreenNotifier2D").NotNull(nameof(_onScreenNotifier));
 
 		_onScreenNotifier.ScreenExited += OnScreenExited;
 		BodyEntered += OnBodyEntered;
