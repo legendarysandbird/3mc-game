@@ -1,72 +1,72 @@
-using Godot;
 using System.Diagnostics;
+using Godot;
 
 [GlobalClass]
 public partial class EnemyDirector : Node
 {
-	[Export] private Godot.Collections.Array<PackedScene>? _mobTypes;
-	[Export] private PathFollow2D? _spawnNode;
-	[Export] private int _maxMobCount;
+    [Export] private Godot.Collections.Array<PackedScene>? _mobTypes;
+    [Export] private PathFollow2D? _spawnNode;
+    [Export] private int _maxMobCount;
 
-	private Timer? _spawnTimer;
-	private int _curMobCount;
+    private Timer? _spawnTimer;
+    private int _curMobCount;
 
 
-	[Signal] public delegate void EnemyDeathEventHandler();
+    [Signal] public delegate void EnemyDeathEventHandler();
 
-	public override void _Ready()
-	{
-		_mobTypes.NotNull(nameof(_mobTypes));
-		_spawnNode.NotNull(nameof(_spawnNode));
+    public override void _Ready()
+    {
+        _mobTypes.NotNull(nameof(_mobTypes));
+        _spawnNode.NotNull(nameof(_spawnNode));
 
-		Debug.Assert(_maxMobCount > 0);
-		Debug.Assert(_curMobCount == 0);
-	
-		_spawnTimer = GetNode<Timer>("SpawnTimer").NotNull(nameof(_spawnTimer));
-		_spawnTimer.Timeout += OnSpawnTimerTimeout;
+        Debug.Assert(_maxMobCount > 0);
+        Debug.Assert(_curMobCount == 0);
 
-		// Give us one enemy to start with so we aren't waiting 5 seconds
-		// Coordinates are where the debugging enemy usually is
-		AddChild(CreateEnemyAt(new Vector2(765, 253)));
-		_curMobCount += 1;
-	
-		_spawnTimer.Start();
-	}
+        _spawnTimer = GetNode<Timer>("SpawnTimer").NotNull(nameof(_spawnTimer));
+        _spawnTimer.Timeout += OnSpawnTimerTimeout;
 
-	private Enemy CreateEnemy()
-	{
-		_spawnNode.NotNull(nameof(_spawnNode));
+        // Give us one enemy to start with so we aren't waiting 5 seconds
+        // Coordinates are where the debugging enemy usually is
+        AddChild(CreateEnemyAt(new Vector2(765, 253)));
+        _curMobCount += 1;
 
-		_spawnNode.ProgressRatio = GD.Randf();
-		return CreateEnemyAt(_spawnNode.Position);
-	}
+        _spawnTimer.Start();
+    }
 
-	private Enemy CreateEnemyAt(Vector2 pos)
-	{
-		_mobTypes.NotNull(nameof(_mobTypes));
-	
-		PackedScene mobScene = _mobTypes.PickRandom();
-		Enemy mob = mobScene.Instantiate<Enemy>();
-		mob.Position = pos;
+    private Enemy CreateEnemy()
+    {
+        _spawnNode.NotNull(nameof(_spawnNode));
 
-		mob.EnemyDeath += OnEnemyDeath;
+        _spawnNode.ProgressRatio = GD.Randf();
+        return CreateEnemyAt(_spawnNode.Position);
+    }
 
-		return mob;
-	}
+    private Enemy CreateEnemyAt(Vector2 pos)
+    {
+        _mobTypes.NotNull(nameof(_mobTypes));
 
-	private void OnSpawnTimerTimeout()
-	{
-		if (_curMobCount < _maxMobCount)
-		{
-			AddChild(CreateEnemy());
-			_curMobCount++;
-		}
-	}
+        PackedScene mobScene = _mobTypes.PickRandom();
+        Enemy mob = mobScene.Instantiate<Enemy>();
+        mob.Position = pos;
 
-	// Event bus for communicating enemy death with the score counter
-	private void OnEnemyDeath()
-	{
-		EmitSignal(SignalName.EnemyDeath);
-		_curMobCount--;
-	}
+        mob.EnemyDeath += OnEnemyDeath;
+
+        return mob;
+    }
+
+    private void OnSpawnTimerTimeout()
+    {
+        if (_curMobCount < _maxMobCount)
+        {
+            AddChild(CreateEnemy());
+            _curMobCount++;
+        }
+    }
+
+    // Event bus for communicating enemy death with the score counter
+    private void OnEnemyDeath()
+    {
+        EmitSignal(SignalName.EnemyDeath);
+        _curMobCount--;
+    }
 }

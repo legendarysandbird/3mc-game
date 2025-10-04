@@ -2,22 +2,22 @@ using Godot;
 
 public partial class ScoreCounter : Label
 {
-	[Export] private EnemyDirector? _enemyDirector;
+    [Export] private EnemyDirector? _enemyDirector;
 
-	private int _score;
+    private int _score;
 
-	public override void _Ready()
-	{
-		_enemyDirector.NotNull(nameof(_enemyDirector));
+    public override void _Ready()
+    {
+        _enemyDirector.NotNull(nameof(_enemyDirector));
 
-		_enemyDirector.EnemyDeath += OnEnemyDeath;
+        _enemyDirector.EnemyDeath += OnEnemyDeath;
 
-		Text = _score.ToString();
-	}
+        Text = _score.ToString();
+    }
 
-	private void OnEnemyDeath()
-	{
-		_score++;
-		Text = _score.ToString();
-	}
+    private void OnEnemyDeath()
+    {
+        _score++;
+        Text = _score.ToString();
+    }
 }

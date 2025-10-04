@@ -3,61 +3,61 @@ using Godot;
 [GlobalClass]
 public partial class Enemy : CharacterBody2D
 {
-	[Export] private float _speed = 100.0f;
-	[Export] private int _contactDamage = 1;
+    [Export] private float _speed = 100.0f;
+    [Export] private int _contactDamage = 1;
 
-	[Signal] public delegate void EnemyDeathEventHandler();
-	
-	private VisibleOnScreenNotifier2D? _visibilityNotifier;
-	private Area2D? _hitbox;
-	private Health? _healthPool;
-	private Player? _player;
-	private Vector2 _calculatedVelocity;
+    [Signal] public delegate void EnemyDeathEventHandler();
 
-	public override void _Ready()
-	{
-		_visibilityNotifier = GetNode<VisibleOnScreenNotifier2D>("VisibleOnScreenNotifier2D").GDNotNull(nameof(_visibilityNotifier));
-		_hitbox = GetNode<Area2D>("Hitbox").GDNotNull(nameof(_hitbox));
-		_healthPool = GetNode<Health>("Health").GDNotNull(nameof(_healthPool));
-		_player = (Player)GetTree().Root.FindChildren("*", nameof(Player), true, false)[0].NotNull(nameof(_player));
+    private VisibleOnScreenNotifier2D? _visibilityNotifier;
+    private Area2D? _hitbox;
+    private Health? _healthPool;
+    private Player? _player;
+    private Vector2 _calculatedVelocity;
 
-		_hitbox.AreaEntered += OnHitboxAreaEntered;
-		_healthPool.HealthEmpty += OnHealthPoolEmpty;
-	}
+    public override void _Ready()
+    {
+        _visibilityNotifier = GetNode<VisibleOnScreenNotifier2D>("VisibleOnScreenNotifier2D").GDNotNull(nameof(_visibilityNotifier));
+        _hitbox = GetNode<Area2D>("Hitbox").GDNotNull(nameof(_hitbox));
+        _healthPool = GetNode<Health>("Health").GDNotNull(nameof(_healthPool));
+        _player = (Player)GetTree().Root.FindChildren("*", nameof(Player), true, false)[0].NotNull(nameof(_player));
 
-	public override void _PhysicsProcess(double delta)
-	{
-		Velocity = CalculateVelocity();
-		MoveAndSlide();
-	}
+        _hitbox.AreaEntered += OnHitboxAreaEntered;
+        _healthPool.HealthEmpty += OnHealthPoolEmpty;
+    }
 
-	private Vector2 CalculateVelocity()
-	{
-		_visibilityNotifier.NotNull(nameof(_visibilityNotifier));
+    public override void _PhysicsProcess(double delta)
+    {
+        Velocity = CalculateVelocity();
+        MoveAndSlide();
+    }
 
-		if (!_visibilityNotifier.IsOnScreen() || !IsInstanceValid(_player))
-		{
-			return Vector2.Zero;
-		}
+    private Vector2 CalculateVelocity()
+    {
+        _visibilityNotifier.NotNull(nameof(_visibilityNotifier));
 
-		Vector2 direction = (_player.GlobalPosition - GlobalPosition).Normalized();
-		return direction * _speed;
-	}
+        if (!_visibilityNotifier.IsOnScreen() || !IsInstanceValid(_player))
+        {
+            return Vector2.Zero;
+        }
 
-	private void OnHitboxAreaEntered(Node2D area)
-	{
-		_healthPool.NotNull(nameof(_healthPool));
+        Vector2 direction = (_player.GlobalPosition - GlobalPosition).Normalized();
+        return direction * _speed;
+    }
 
-		if (area is Projectile projectile)
-		{
-			_healthPool.ChangeHealth(projectile.Damage);
-			area.QueueFree();
-		}
-	}
+    private void OnHitboxAreaEntered(Node2D area)
+    {
+        _healthPool.NotNull(nameof(_healthPool));
 
-	private void OnHealthPoolEmpty()
-	{
-		EmitSignal(SignalName.EnemyDeath);
-		QueueFree();
-	}
+        if (area is Projectile projectile)
+        {
+            _healthPool.ChangeHealth(projectile.Damage);
+            area.QueueFree();
+        }
+    }
+
+    private void OnHealthPoolEmpty()
+    {
+        EmitSignal(SignalName.EnemyDeath);
+        QueueFree();
+    }
 }
