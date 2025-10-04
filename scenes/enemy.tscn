@@ -1,6 +1,6 @@
 [gd_scene load_steps=14 format=3 uid="uid://cnlqagmncoame"]
 
-[ext_resource type="Script" uid="uid://hmcjgj6inivy" path="res://scripts/enemy/enemy.gd" id="1_jn7qj"]
+[ext_resource type="Script" uid="uid://bnswajqtr6k3y" path="res://scripts/enemy/Enemy.cs" id="1_jn7qj"]
 [ext_resource type="Texture2D" uid="uid://w1uqcrfpbwa0" path="res://assets/enemies_temp/enemy-01_singularity/idle/Singularity-idle-01.png" id="8_6w8d1"]
 [ext_resource type="Texture2D" uid="uid://biww51sikbddw" path="res://assets/enemies_temp/enemy-01_singularity/idle/Singularity-idle-02.png" id="9_btwad"]
 [ext_resource type="PackedScene" uid="uid://dys64wtfdquec" path="res://scenes/health.tscn" id="9_ipns3"]
@@ -9,7 +9,7 @@
 [ext_resource type="Texture2D" uid="uid://dwd7qicvb63ny" path="res://assets/enemies_temp/enemy-01_singularity/idle/Singularity-idle-04.png" id="11_kwa08"]
 [ext_resource type="Texture2D" uid="uid://d1juvqb3dbpss" path="res://assets/enemies_temp/enemy-01_singularity/idle/Singularity-idle-05.png" id="12_ov0go"]
 [ext_resource type="Texture2D" uid="uid://cehniqydpave1" path="res://assets/enemies_temp/enemy-01_singularity/idle/Singularity-idle-06.png" id="13_gdfry"]
-[ext_resource type="Script" uid="uid://d2y8p505hkh5e" path="res://scripts/enemy/enemy_animation.gd" id="14_faaic"]
+[ext_resource type="Script" uid="uid://3r2xnejjkrtp" path="res://scripts/enemy/EnemyAnimation.cs" id="14_faaic"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tc6bn"]
 animations = [{
@@ -71,12 +71,12 @@ collision_layer = 4
 floor_snap_length = 5.0
 script = ExtResource("1_jn7qj")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("enemy")]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("_enemy")]
 scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_tc6bn")
 animation = &"aggro"
 script = ExtResource("14_faaic")
-enemy = NodePath("..")
+_enemy = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CircleShape2D_gu2ut")
@@ -93,11 +93,11 @@ collision_mask = 8
 shape = SubResource("CircleShape2D_ar18r")
 
 [node name="Health" parent="." instance=ExtResource("9_ipns3")]
-max_health = 5
+MaxHealth = 5
 
-[node name="HealthBar" parent="." node_paths=PackedStringArray("health_pool") instance=ExtResource("10_8qclf")]
+[node name="HealthBar" parent="." node_paths=PackedStringArray("_healthPool") instance=ExtResource("10_8qclf")]
 offset_left = -38.0
 offset_top = -51.0
 offset_right = 38.0
 offset_bottom = -39.0
-health_pool = NodePath("../Health")
+_healthPool = NodePath("../Health")
