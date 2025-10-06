@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="3MC Game"
-run/main_scene="uid://c6q5d36bkbhax"
+run/main_scene="res://scenes/temp_level.tscn"
 config/features=PackedStringArray("4.5", "C#", "Forward Plus")
 
 [debug]
