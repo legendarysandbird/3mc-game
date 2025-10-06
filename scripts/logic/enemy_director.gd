@@ -26,6 +26,8 @@ func _ready() -> void:
 	add_child(create_enemy_at(Vector2(765, 253)))
 	cur_mob_count += 1
 	
+	spawn_timer.start()
+	
 func create_enemy() -> Enemy:
 	spawn_node.set_progress_ratio(randf())
 	return create_enemy_at(spawn_node.get_position())
