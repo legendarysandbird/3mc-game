@@ -353,16 +353,15 @@ zoom = Vector2(0.5, 0.6)
 
 [node name="Player" parent="." instance=ExtResource("1_sqah0")]
 position = Vector2(386, 280)
-projectile_speed = 300.0
 
-[node name="EnemyDirector" parent="." node_paths=PackedStringArray("spawn_node") instance=ExtResource("4_kxde3")]
-mob_types = Array[PackedScene]([ExtResource("4_vcli0")])
-spawn_node = NodePath("../World/SpawnPath/SpawnNode")
-max_mob_count = 5
+[node name="EnemyDirector" parent="." node_paths=PackedStringArray("_spawnNode") instance=ExtResource("4_kxde3")]
+_mobTypes = Array[PackedScene]([ExtResource("4_vcli0")])
+_spawnNode = NodePath("../World/SpawnPath/SpawnNode")
+_maxMobCount = 5
 
-[node name="ScoreCounter" parent="." node_paths=PackedStringArray("director") instance=ExtResource("4_7hwuv")]
+[node name="ScoreCounter" parent="." node_paths=PackedStringArray("_enemyDirector") instance=ExtResource("4_7hwuv")]
 offset_left = -383.0
 offset_top = 136.0
 offset_right = -346.0
 offset_bottom = 224.0
-director = NodePath("../EnemyDirector")
+_enemyDirector = NodePath("../EnemyDirector")

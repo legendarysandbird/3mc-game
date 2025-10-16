@@ -1,12 +1,12 @@
 [gd_scene load_steps=28 format=3 uid="uid://cj03ghl2j3ane"]
 
-[ext_resource type="Script" uid="uid://dbj3dfskhudra" path="res://scripts/player/player.gd" id="1_au5g1"]
+[ext_resource type="Script" uid="uid://blawm2wye0t4o" path="res://scripts/player/Player.cs" id="1_au5g1"]
 [ext_resource type="Texture2D" uid="uid://6svx5ryhte6x" path="res://assets/player_temp/idle/character-IDLE-01.png" id="2_f1ej7"]
 [ext_resource type="Texture2D" uid="uid://ddmfj3llyf1p3" path="res://assets/player_temp/idle/character-IDLE-02.png" id="3_oprun"]
 [ext_resource type="Texture2D" uid="uid://bob7uj4xse76u" path="res://assets/player_temp/idle/character-IDLE-03.png" id="4_a8ls1"]
 [ext_resource type="Texture2D" uid="uid://iqcs4yxeapmt" path="res://assets/player_temp/idle/character-IDLE-04.png" id="5_qfm1y"]
 [ext_resource type="Texture2D" uid="uid://v0bugacmj7j0" path="res://assets/player_temp/idle/character-IDLE-05.png" id="6_fulsm"]
-[ext_resource type="Script" uid="uid://dkr5nbggd1n4m" path="res://scripts/player/player_animation.gd" id="6_xqplr"]
+[ext_resource type="Script" uid="uid://bedm18bstlp8w" path="res://scripts/player/PlayerAnimation.cs" id="6_xqplr"]
 [ext_resource type="Texture2D" uid="uid://bkjv3ienauqar" path="res://assets/player_temp/idle/character-IDLE-06.png" id="7_4r5pv"]
 [ext_resource type="Texture2D" uid="uid://cdqn2t8avddst" path="res://assets/player_temp/walk/character-LR-move-01.png" id="8_60mlk"]
 [ext_resource type="Texture2D" uid="uid://bu53fnet8g1sp" path="res://assets/player_temp/walk/character-LR-move-02.png" id="9_i4ail"]
@@ -14,7 +14,7 @@
 [ext_resource type="Texture2D" uid="uid://dg4v75d88wljd" path="res://assets/player_temp/walk/character-LR-move-04.png" id="11_4ni07"]
 [ext_resource type="Texture2D" uid="uid://cltc3hw1pqdg8" path="res://assets/player_temp/walk/character-LR-move-05.png" id="12_l71n6"]
 [ext_resource type="Texture2D" uid="uid://bk15mcteg2cqc" path="res://assets/player_temp/walk/character-LR-move-06.png" id="13_ke2ow"]
-[ext_resource type="Script" uid="uid://bjp3npw4n82o" path="res://scripts/player/arm.gd" id="15_oprun"]
+[ext_resource type="Script" uid="uid://dv6r414ohkmfg" path="res://scripts/player/Arm.cs" id="15_oprun"]
 [ext_resource type="Texture2D" uid="uid://ulp21w0q2l1a" path="res://assets/player_temp/arm-weapon/arm-IDLE-01.png" id="16_i4ail"]
 [ext_resource type="Texture2D" uid="uid://kj5w8eo35sqc" path="res://assets/player_temp/arm-weapon/arm-IDLE-02.png" id="17_a38lo"]
 [ext_resource type="Texture2D" uid="uid://cd7po0v5vxr8g" path="res://assets/player_temp/arm-weapon/arm-IDLE-03.png" id="18_4ni07"]
@@ -111,14 +111,13 @@ height = 146.0
 collision_layer = 2
 floor_snap_length = 5.0
 script = ExtResource("1_au5g1")
-projectile_speed = 600.0
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("player")]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." node_paths=PackedStringArray("_player")]
 scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_tc6bn")
 animation = &"idle"
 script = ExtResource("6_xqplr")
-player = NodePath("..")
+_player = NodePath("..")
 
 [node name="Arm" type="AnimatedSprite2D" parent="AnimatedSprite2D"]
 position = Vector2(-106.667, -146.667)
@@ -157,11 +156,11 @@ wait_time = 0.5
 one_shot = true
 
 [node name="Health" parent="." instance=ExtResource("22_a38lo")]
-max_health = 3
+MaxHealth = 3
 
-[node name="HealthBar" parent="." node_paths=PackedStringArray("health_pool") instance=ExtResource("23_4ni07")]
+[node name="HealthBar" parent="." node_paths=PackedStringArray("_healthPool") instance=ExtResource("23_4ni07")]
 offset_left = -32.0
 offset_top = -94.0
 offset_right = 44.0
 offset_bottom = -82.0
-health_pool = NodePath("../Health")
+_healthPool = NodePath("../Health")

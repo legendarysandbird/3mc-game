@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://crfni8y6b75st"]
 
-[ext_resource type="Script" uid="uid://b722dtlyuhgwi" path="res://scripts/logic/score_counter.gd" id="1_terno"]
+[ext_resource type="Script" uid="uid://csjh4mwompj0n" path="res://scripts/logic/ScoreCounter.cs" id="1_terno"]
 
 [sub_resource type="SystemFont" id="SystemFont_t7i3n"]
 subpixel_positioning = 0
