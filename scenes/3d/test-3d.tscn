@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://o0rgradd40lp"]
+
+[ext_resource type="PackedScene" uid="uid://bqcvh44dkk2rl" path="res://scenes/3d/3DCharacter.tscn" id="1_rqajm"]
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_ykdiw"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_rqajm"]
+
+[node name="Test3d" type="Node3D"]
+
+[node name="Geometry" type="Node" parent="."]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Geometry"]
+transform = Transform3D(6, 0, 0, 0, 6, 0, 0, 0, 6, 0, 0, 0)
+mesh = SubResource("PlaneMesh_ykdiw")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Geometry/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Geometry/MeshInstance3D/StaticBody3D"]
+transform = Transform3D(-2.025, 0, 1.7703114e-07, 0, 2.025, 0, -1.7703114e-07, 0, -2.025, 0, -1.0155739, 0)
+shape = SubResource("BoxShape3D_rqajm")
+
+[node name="CharacterBody3D" parent="." instance=ExtResource("1_rqajm")]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 1.0371728, 0)
+
+[node name="Camera3D" type="Camera3D" parent="CharacterBody3D"]
+transform = Transform3D(5, 0, 0, 0, 4.330127, 2.5, 0, -2.5, 4.330127, 0, 13.384434, 17.71196)

@@ -1,0 +1,49 @@
+using Godot;
+
+[GlobalClass]
+public partial class Projectile3D : Area3D
+{
+    private static readonly PackedScene _projectileScene = GD.Load<PackedScene>("uid://da4rvan0yy3eh");
+
+    private Vector3 _velocity;
+    private VisibleOnScreenNotifier3D? _onScreenNotifier;
+
+    public int Damage;
+
+    public static Projectile3D Create(Vector3 startingPosition, Vector3 startingVelocity, int startingDamage = -1)
+    {
+        Projectile3D projectile = _projectileScene.Instantiate<Projectile3D>();
+        projectile.GlobalPosition = startingPosition;
+        projectile._velocity = startingVelocity;
+        projectile.Damage = startingDamage;
+
+        return projectile;
+    }
+
+    public override void _Ready()
+    {
+        _onScreenNotifier = GetNode<VisibleOnScreenNotifier3D>("VisibleOnScreenNotifier3D").NotNull(nameof(_onScreenNotifier));
+
+        _onScreenNotifier.ScreenExited += OnScreenExited;
+        BodyEntered += OnBodyEntered;
+        LookAt(GlobalPosition + _velocity);
+    }
+
+    public override void _PhysicsProcess(double delta)
+    {
+        GlobalPosition += _velocity * (float)delta;
+    }
+
+    private void OnScreenExited()
+    {
+        QueueFree();
+    }
+
+    private void OnBodyEntered(Node body)
+    {
+        if (body is TileMapLayer)
+        {
+            QueueFree();
+        }
+    }
+}

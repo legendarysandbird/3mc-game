@@ -1,0 +1,134 @@
+[gd_scene load_steps=25 format=3 uid="uid://bqcvh44dkk2rl"]
+
+[ext_resource type="Script" uid="uid://up56kqluqw88" path="res://scripts/player/CharacterController3D.cs" id="1_pw3wr"]
+[ext_resource type="Texture2D" uid="uid://6svx5ryhte6x" path="res://assets/player_temp/idle/character-IDLE-01.png" id="2_0vl7f"]
+[ext_resource type="Texture2D" uid="uid://ddmfj3llyf1p3" path="res://assets/player_temp/idle/character-IDLE-02.png" id="3_c2csy"]
+[ext_resource type="Texture2D" uid="uid://bob7uj4xse76u" path="res://assets/player_temp/idle/character-IDLE-03.png" id="4_4tw1y"]
+[ext_resource type="Texture2D" uid="uid://iqcs4yxeapmt" path="res://assets/player_temp/idle/character-IDLE-04.png" id="5_lteqm"]
+[ext_resource type="Texture2D" uid="uid://v0bugacmj7j0" path="res://assets/player_temp/idle/character-IDLE-05.png" id="6_j3vbf"]
+[ext_resource type="Texture2D" uid="uid://bkjv3ienauqar" path="res://assets/player_temp/idle/character-IDLE-06.png" id="7_2kqr7"]
+[ext_resource type="Texture2D" uid="uid://cdqn2t8avddst" path="res://assets/player_temp/walk/character-LR-move-01.png" id="8_sgu87"]
+[ext_resource type="Texture2D" uid="uid://bu53fnet8g1sp" path="res://assets/player_temp/walk/character-LR-move-02.png" id="9_hn5nn"]
+[ext_resource type="Texture2D" uid="uid://crutwks7fm75l" path="res://assets/player_temp/walk/character-LR-move-03.png" id="10_c32ux"]
+[ext_resource type="Texture2D" uid="uid://dg4v75d88wljd" path="res://assets/player_temp/walk/character-LR-move-04.png" id="11_goar4"]
+[ext_resource type="Texture2D" uid="uid://cltc3hw1pqdg8" path="res://assets/player_temp/walk/character-LR-move-05.png" id="12_4ovc8"]
+[ext_resource type="Texture2D" uid="uid://bk15mcteg2cqc" path="res://assets/player_temp/walk/character-LR-move-06.png" id="13_okgm1"]
+[ext_resource type="Texture2D" uid="uid://ulp21w0q2l1a" path="res://assets/player_temp/arm-weapon/arm-IDLE-01.png" id="14_3kywm"]
+[ext_resource type="Texture2D" uid="uid://kj5w8eo35sqc" path="res://assets/player_temp/arm-weapon/arm-IDLE-02.png" id="15_f0wlf"]
+[ext_resource type="Texture2D" uid="uid://cd7po0v5vxr8g" path="res://assets/player_temp/arm-weapon/arm-IDLE-03.png" id="16_3a806"]
+[ext_resource type="Texture2D" uid="uid://x0c3eeeibap3" path="res://assets/player_temp/arm-weapon/arm-IDLE-04.png" id="17_dinxh"]
+[ext_resource type="Texture2D" uid="uid://bkkayyx3a5kbg" path="res://assets/player_temp/arm-weapon/arm-IDLE-05.png" id="18_knlgu"]
+[ext_resource type="Texture2D" uid="uid://cv0xq3nuuyr0x" path="res://assets/player_temp/arm-weapon/arm-IDLE-06.png" id="19_n8oba"]
+[ext_resource type="PackedScene" path="res://scenes/health.tscn" id="20_0vl7f"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_014xr"]
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_pw3wr"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pwcvh"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_0vl7f")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_c2csy")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_4tw1y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_lteqm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_j3vbf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_2kqr7")
+}],
+"loop": true,
+"name": &"idle",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_sgu87")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_hn5nn")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_c32ux")
+}, {
+"duration": 1.0,
+"texture": ExtResource("11_goar4")
+}, {
+"duration": 1.0,
+"texture": ExtResource("12_4ovc8")
+}, {
+"duration": 1.0,
+"texture": ExtResource("13_okgm1")
+}],
+"loop": true,
+"name": &"walk",
+"speed": 5.0
+}]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_btglv"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("14_3kywm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("15_f0wlf")
+}, {
+"duration": 1.0,
+"texture": ExtResource("16_3a806")
+}, {
+"duration": 1.0,
+"texture": ExtResource("17_dinxh")
+}, {
+"duration": 1.0,
+"texture": ExtResource("18_knlgu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("19_n8oba")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="3D Character" type="CharacterBody3D"]
+transform = Transform3D(0.2, 0, 0, 0, 0.2, 0, 0, 0, 0.2, 0, 0, 0)
+script = ExtResource("1_pw3wr")
+_moveSpeed = 5.0
+
+[node name="CollisionBox" type="CollisionShape3D" parent="."]
+transform = Transform3D(4.7, 0, 0, 0, 4.7, 0, 0, 0, 4.7, 0, 0, 0)
+shape = SubResource("CylinderShape3D_014xr")
+
+[node name="Hitbox" type="Area3D" parent="."]
+transform = Transform3D(4.7, 0, 0, 0, 4.7, 0, 0, 0, 4.7, 0, 0, 0)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Hitbox"]
+shape = SubResource("CylinderShape3D_pw3wr")
+
+[node name="Body Animation" type="AnimatedSprite3D" parent="."]
+sprite_frames = SubResource("SpriteFrames_pwcvh")
+animation = &"walk"
+
+[node name="Arm Animation" type="AnimatedSprite3D" parent="Body Animation"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.55576086, 1.1623092, 0)
+sprite_frames = SubResource("SpriteFrames_btglv")
+frame = 3
+frame_progress = 0.46777165
+
+[node name="Projectile Anchor" type="Node3D" parent="Body Animation/Arm Animation"]
+
+[node name="Health" parent="." instance=ExtResource("20_0vl7f")]
+MaxHealth = 3
+
+[node name="GunTimer" type="Timer" parent="."]
+wait_time = 0.25
