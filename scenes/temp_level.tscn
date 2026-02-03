@@ -1,10 +1,11 @@
-[gd_scene load_steps=9 format=4 uid="uid://chvfto1w6w3um"]
+[gd_scene load_steps=10 format=4 uid="uid://chvfto1w6w3um"]
 
 [ext_resource type="PackedScene" uid="uid://cj03ghl2j3ane" path="res://scenes/player.tscn" id="1_sqah0"]
 [ext_resource type="Texture2D" uid="uid://cxlm3j5d8v1hh" path="res://assets/level/tilesheet_complete.png" id="2_ka4wd"]
 [ext_resource type="PackedScene" uid="uid://crfni8y6b75st" path="res://scenes/score_counter.tscn" id="4_7hwuv"]
 [ext_resource type="PackedScene" uid="uid://d0idf708cetp0" path="res://scenes/enemy_director.tscn" id="4_kxde3"]
 [ext_resource type="PackedScene" uid="uid://cnlqagmncoame" path="res://scenes/enemy.tscn" id="4_vcli0"]
+[ext_resource type="AudioStream" uid="uid://4v5bejbvow1p" path="res://assets/sounds/curt-gun.mp3" id="6_vcli0"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_qvk2k"]
 texture = ExtResource("2_ka4wd")
@@ -365,3 +366,7 @@ offset_top = 136.0
 offset_right = -346.0
 offset_bottom = 224.0
 _enemyDirector = NodePath("../EnemyDirector")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("6_vcli0")
+autoplay = true
