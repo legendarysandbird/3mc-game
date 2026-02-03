@@ -1,11 +1,11 @@
-[gd_scene load_steps=3 format=3 uid="uid://crfni8y6b75st"]
+[gd_scene format=3 uid="uid://b0u1ljkfsmaog"]
 
 [ext_resource type="Script" uid="uid://csjh4mwompj0n" path="res://scripts/logic/ScoreCounter.cs" id="1_terno"]
 
 [sub_resource type="SystemFont" id="SystemFont_t7i3n"]
 subpixel_positioning = 0
 
-[node name="ScoreCounter" type="Label"]
+[node name="ScoreCounter" type="Label" unique_id=1697585653]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -24,7 +24,7 @@ text = "0"
 horizontal_alignment = 1
 script = ExtResource("1_terno")
 
-[node name="ScoreLabel" type="Label" parent="."]
+[node name="ScoreLabel" type="Label" parent="." unique_id=513594972]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5

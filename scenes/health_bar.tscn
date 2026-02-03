@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://dr0ep3p4p2qd"]
+[gd_scene format=3 uid="uid://cw3qtvla3nvo7"]
 
 [ext_resource type="Script" uid="uid://do2kxlenxmu0e" path="res://scripts/logic/HealthBar.cs" id="1_1bvlm"]
 
@@ -26,7 +26,7 @@ corner_radius_top_right = 5
 corner_radius_bottom_right = 5
 corner_radius_bottom_left = 5
 
-[node name="HealthBar" type="ProgressBar"]
+[node name="HealthBar" type="ProgressBar" unique_id=1560013367]
 offset_right = 76.0
 offset_bottom = 12.0
 theme_override_styles/background = SubResource("StyleBoxFlat_1bvlm")

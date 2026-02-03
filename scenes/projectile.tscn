@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://da4rvan0yy3eh"]
+[gd_scene format=3 uid="uid://8tkgka1tp8wf"]
 
 [ext_resource type="Script" uid="uid://b5eu2nf4c7svt" path="res://scripts/player/Projectile.cs" id="1_c8fcr"]
 [ext_resource type="Texture2D" uid="uid://oxdvyrnq717m" path="res://assets/projectiles/bullet-01.png" id="2_6q2a6"]
@@ -25,19 +25,19 @@ animations = [{
 [sub_resource type="CircleShape2D" id="CircleShape2D_q3m7n"]
 radius = 6.0
 
-[node name="Projectile" type="Area2D"]
+[node name="Projectile" type="Area2D" unique_id=1657913743]
 scale = Vector2(0.4, 0.4)
 collision_layer = 8
 script = ExtResource("1_c8fcr")
 
-[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=1401041127]
 sprite_frames = SubResource("SpriteFrames_w7nm8")
 autoplay = "default"
 frame = 2
 frame_progress = 0.889593
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=481896646]
 position = Vector2(12.5, 0)
 shape = SubResource("CircleShape2D_q3m7n")
 
-[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=1862519784]

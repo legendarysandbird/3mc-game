@@ -11,8 +11,8 @@ config_version=5
 [application]
 
 config/name="3MC Game"
-run/main_scene="uid://c6q5d36bkbhax"
-config/features=PackedStringArray("4.5", "C#", "Forward Plus")
+run/main_scene="uid://chvfto1w6w3um"
+config/features=PackedStringArray("4.6", "C#", "Forward Plus")
 
 [debug]
 
