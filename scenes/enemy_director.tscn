@@ -1,9 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://d0idf708cetp0"]
+[gd_scene format=3 uid="uid://ch15dovngqxm3"]
 
 [ext_resource type="Script" uid="uid://cyhddw6iuyqmp" path="res://scripts/logic/EnemyDirector.cs" id="1_0l0im"]
 
-[node name="EnemyDirector" type="Node"]
+[node name="EnemyDirector" type="Node" unique_id=1015239276]
 script = ExtResource("1_0l0im")
 
-[node name="SpawnTimer" type="Timer" parent="."]
+[node name="SpawnTimer" type="Timer" parent="." unique_id=328365008]
 wait_time = 5.0

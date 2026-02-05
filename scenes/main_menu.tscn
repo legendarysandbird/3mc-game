@@ -1,8 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://euk67ei7hvat"]
+[gd_scene format=3 uid="uid://ba18wt5cl0as3"]
 
 [ext_resource type="Script" uid="uid://b7v25pf8m2sab" path="res://scripts/user_interface/MainMenu.cs" id="1_l6cm7"]
 
-[node name="Main Menu" type="Control"]
+[node name="Main Menu" type="Control" unique_id=3344391]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
@@ -12,7 +12,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_l6cm7")
 
-[node name="Background" type="ColorRect" parent="."]
+[node name="Background" type="ColorRect" parent="." unique_id=140905938]
 layout_mode = 0
 offset_left = -1.0
 offset_top = -429.0
@@ -20,7 +20,7 @@ offset_right = 2294.0
 offset_bottom = 648.0
 color = Color(0.3372549, 0.64705884, 0.83137256, 1)
 
-[node name="3MC Game" type="Label" parent="."]
+[node name="3MC Game" type="Label" parent="." unique_id=393535143]
 layout_mode = 0
 offset_left = 823.0
 offset_top = -370.0
@@ -29,7 +29,7 @@ offset_bottom = -195.0
 theme_override_font_sizes/font_size = 128
 text = "3MC Game"
 
-[node name="PLAY" type="Button" parent="."]
+[node name="PLAY" type="Button" parent="." unique_id=293556355]
 layout_mode = 0
 offset_left = 950.0
 offset_top = 411.0
@@ -38,7 +38,7 @@ offset_bottom = 507.0
 theme_override_font_sizes/font_size = 64
 text = "PLAY"
 
-[node name="SeedEdit" type="LineEdit" parent="."]
+[node name="SeedEdit" type="LineEdit" parent="." unique_id=1204272760]
 layout_mode = 0
 offset_left = 971.0
 offset_top = 218.0
@@ -49,6 +49,6 @@ placeholder_text = "enter seed"
 alignment = 1
 max_length = 10
 
-[node name="Camera2D" type="Camera2D" parent="."]
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1024741284]
 position = Vector2(1147.6687, 110.18517)
 zoom = Vector2(0.5, 0.6)

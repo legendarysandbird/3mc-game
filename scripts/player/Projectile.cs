@@ -3,7 +3,7 @@ using Godot;
 [GlobalClass]
 public partial class Projectile : Area2D
 {
-    private static readonly PackedScene _projectileScene = GD.Load<PackedScene>("uid://da4rvan0yy3eh");
+    private static readonly PackedScene _projectileScene = GD.Load<PackedScene>("uid://8tkgka1tp8wf");
 
     private Vector2 _velocity;
     private VisibleOnScreenNotifier2D? _onScreenNotifier;
