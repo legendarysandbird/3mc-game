@@ -14,7 +14,6 @@
 [ext_resource type="Texture2D" uid="uid://dg4v75d88wljd" path="res://assets/player_temp/walk/character-LR-move-04.png" id="11_4ni07"]
 [ext_resource type="Texture2D" uid="uid://cltc3hw1pqdg8" path="res://assets/player_temp/walk/character-LR-move-05.png" id="12_l71n6"]
 [ext_resource type="Texture2D" uid="uid://bk15mcteg2cqc" path="res://assets/player_temp/walk/character-LR-move-06.png" id="13_ke2ow"]
-[ext_resource type="Script" uid="uid://dv6r414ohkmfg" path="res://scripts/player/Arm.cs" id="15_oprun"]
 [ext_resource type="Texture2D" uid="uid://ulp21w0q2l1a" path="res://assets/player_temp/arm-weapon/arm-IDLE-01.png" id="16_i4ail"]
 [ext_resource type="Texture2D" uid="uid://kj5w8eo35sqc" path="res://assets/player_temp/arm-weapon/arm-IDLE-02.png" id="17_a38lo"]
 [ext_resource type="Texture2D" uid="uid://cd7po0v5vxr8g" path="res://assets/player_temp/arm-weapon/arm-IDLE-03.png" id="18_4ni07"]
@@ -126,7 +125,6 @@ frame = 2
 frame_progress = 0.505687
 centered = false
 offset = Vector2(-120, -115.334)
-script = ExtResource("15_oprun")
 metadata/_edit_group_ = true
 
 [node name="ProjectileSpawnPoint" type="Node2D" parent="AnimatedSprite2D/Arm" unique_id=1274657802]
