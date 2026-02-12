@@ -4,3 +4,5 @@
 
 [node name="AmmoPool" type="Node" unique_id=271606824]
 script = ExtResource("1_aff0y")
+
+[node name="AmmoReplenishTimer" type="Timer" parent="." unique_id=530682787]

@@ -22,6 +22,8 @@
 [ext_resource type="Texture2D" uid="uid://cv0xq3nuuyr0x" path="res://assets/player_temp/arm-weapon/arm-IDLE-06.png" id="21_ujl30"]
 [ext_resource type="PackedScene" uid="uid://c0ojrp6o22se0" path="res://scenes/health.tscn" id="22_a38lo"]
 [ext_resource type="PackedScene" uid="uid://cw3qtvla3nvo7" path="res://scenes/health_bar.tscn" id="23_4ni07"]
+[ext_resource type="PackedScene" uid="uid://bxsl4wgfmbb1m" path="res://scenes/ammo_pool.tscn" id="23_l71n6"]
+[ext_resource type="PackedScene" uid="uid://c3d3finkraelv" path="res://scenes/ammo_pool_bar.tscn" id="24_ke2ow"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_tc6bn"]
 animations = [{
@@ -161,3 +163,13 @@ offset_top = -94.0
 offset_right = 44.0
 offset_bottom = -82.0
 _healthPool = NodePath("../Health")
+
+[node name="AmmoPool" parent="." unique_id=271606824 instance=ExtResource("23_l71n6")]
+MaxAmmo = 5
+
+[node name="AmmoPoolBar" parent="." unique_id=408888061 node_paths=PackedStringArray("_ammoPool") instance=ExtResource("24_ke2ow")]
+offset_left = -32.0
+offset_top = -108.0
+offset_right = 44.0
+offset_bottom = -96.0
+_ammoPool = NodePath("../AmmoPool")

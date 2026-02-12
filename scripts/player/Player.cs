@@ -14,6 +14,7 @@ public partial class Player : CharacterBody2D
 	private Node2D? _projectileSpawnNode;
 	private Area2D? _hitbox;
 	private Health? _healthPool;
+	private AmmoPool? _ammoPool;
 	private Timer? _jumpTimer;
 	private Timer? _gunTimer;
 	private Vector2 _mousePosition;
@@ -27,6 +28,7 @@ public partial class Player : CharacterBody2D
 		_projectileSpawnNode = GetNode<Node2D>("AnimatedSprite2D/Arm/ProjectileSpawnPoint").NotNull(nameof(_projectileSpawnNode));
 		_hitbox = GetNode<Area2D>("Hitbox").NotNull(nameof(_hitbox));
 		_healthPool = GetNode<Health>("Health").NotNull(nameof(_healthPool));
+		_ammoPool = GetNode<AmmoPool>("AmmoPool").NotNull(nameof(_ammoPool));
 		_jumpTimer = GetNode<Timer>("JumpTimer").NotNull(nameof(_jumpTimer));
 		_gunTimer = GetNode<Timer>("GunTimer").NotNull(nameof(_gunTimer));
 		_mousePosition = GetGlobalMousePosition();
@@ -83,8 +85,14 @@ public partial class Player : CharacterBody2D
 	private void HandleShooting()
 	{
 		_gunTimer.NotNull(nameof(_gunTimer));
-		_projectileSpawnNode.NotNull(nameof(_projectileSpawnNode));
+		_ammoPool.NotNull(nameof(_ammoPool));
 
+		if (!Input.IsActionPressed("fire") || _gunTimer.TimeLeft > 0 || _ammoPool.AmmoPoolValue < 1)
+		{
+			return;
+		}
+
+		_projectileSpawnNode.NotNull(nameof(_projectileSpawnNode));
 		Vector2 spawnPosition = _projectileSpawnNode.GlobalPosition;
 		Vector2 projectileDirection = GetProjectileDirection(spawnPosition);
 		if (projectileDirection != Vector2.Zero)
@@ -92,16 +100,12 @@ public partial class Player : CharacterBody2D
 			ProjectileDirection = projectileDirection;
 		}
 
-		if (!Input.IsActionPressed("fire") || _gunTimer.TimeLeft > 0)
-		{
-			return;
-		}
-
 		_gunTimer.Start();
 
 		Projectile projectile = Projectile.Create(_projectileSpawnNode.GlobalPosition, ProjectileDirection * _projectileSpeed);
 
 		GetTree().Root.AddChild(projectile);
+		_ammoPool.ChangeAmmoPoolValue(-1);
 	}
 
 	private Vector2 GetProjectileDirection(Vector2 spawnPosition)
