@@ -90,16 +90,16 @@ public partial class Player : CharacterBody2D
         _armNode.NotNull(nameof(_armNode));
         _projectileSpawnNode.NotNull(nameof(_projectileSpawnNode));
 
-        if (!Input.IsActionPressed("fire") || _gunTimer.TimeLeft > 0 || _ammoPool.AmmoPoolValue < 1)
-        {
-            return;
-        }
-
         Vector2 sourcePosition = _armNode.GlobalPosition;
         Vector2 projectileDirection = GetProjectileDirection(sourcePosition);
         if (projectileDirection != Vector2.Zero)
         {
             ProjectileDirection = projectileDirection;
+        }
+
+        if (!Input.IsActionPressed("fire") || _gunTimer.TimeLeft > 0 || _ammoPool.AmmoPoolValue < 1)
+        {
+            return;
         }
 
         _gunTimer.Start();
