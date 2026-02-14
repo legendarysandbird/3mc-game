@@ -1,0 +1,8 @@
+[gd_scene format=3 uid="uid://bxsl4wgfmbb1m"]
+
+[ext_resource type="Script" uid="uid://b1iib6iam08if" path="res://scripts/logic/AmmoPool.cs" id="1_aff0y"]
+
+[node name="AmmoPool" type="Node" unique_id=271606824]
+script = ExtResource("1_aff0y")
+
+[node name="AmmoReplenishTimer" type="Timer" parent="." unique_id=530682787]
