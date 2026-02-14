@@ -5,10 +5,10 @@ public partial class Player : CharacterBody2D
 {
     private readonly float _gravity = (float)ProjectSettings.GetSetting("physics/2d/default_gravity");
 
-    [Export] private float _moveSpeed = 200.0f;
-    [Export] private float _jumpVelocity = 700.0f;
-    [Export] private int _rotationSpeed = 30;
-    [Export] private float _projectileSpeed = 300.0f;
+    [Export] private float _moveSpeed;
+    [Export] private float _jumpVelocity;
+    [Export] private int _rotationSpeed;
+    [Export] private float _projectileSpeed;
 
     private Node2D? _armNode;
     private Node2D? _projectileSpawnNode;
