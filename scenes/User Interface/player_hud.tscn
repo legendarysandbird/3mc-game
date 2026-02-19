@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://ccak0ix7wjxui"]
+
+[ext_resource type="PackedScene" uid="uid://cw3qtvla3nvo7" path="res://scenes/User Interface/health_bar.tscn" id="1_wnsji"]
+[ext_resource type="PackedScene" uid="uid://c3d3finkraelv" path="res://scenes/User Interface/ammo_pool_bar.tscn" id="2_4e6fx"]
+[ext_resource type="Texture2D" uid="uid://6svx5ryhte6x" path="res://assets/player_temp/idle/character-IDLE-01.png" id="3_384ni"]
+[ext_resource type="PackedScene" uid="uid://b0u1ljkfsmaog" path="res://scenes/score_counter.tscn" id="4_4e6fx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s015i"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_csa7d"]
+texture = ExtResource("3_384ni")
+region_rect = Rect2(351.61145, 1.6509094, 356.08386, 332.4409)
+
+[node name="PlayerHud" type="Control" unique_id=395627715]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Background" type="ColorRect" parent="." unique_id=273992301]
+layout_mode = 0
+offset_right = 382.0
+offset_bottom = 209.0
+color = Color(0.17254902, 0.17254902, 0.17254902, 0.5019608)
+
+[node name="Background Border" type="Panel" parent="Background" unique_id=1055828762]
+layout_mode = 0
+offset_right = 382.0
+offset_bottom = 209.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_s015i")
+
+[node name="HealthBar" parent="." unique_id=1560013367 instance=ExtResource("1_wnsji")]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 105.0
+offset_right = 376.0
+offset_bottom = 150.0
+
+[node name="AmmoPoolBar" parent="." unique_id=408888061 instance=ExtResource("2_4e6fx")]
+layout_mode = 0
+offset_left = 92.0
+offset_top = 157.0
+offset_right = 376.0
+offset_bottom = 202.0
+
+[node name="Portrait" type="Panel" parent="." unique_id=1139062616]
+layout_mode = 0
+offset_left = 7.0
+offset_top = 6.0
+offset_right = 98.0
+offset_bottom = 97.0
+theme_override_styles/panel = SubResource("StyleBoxTexture_csa7d")
+
+[node name="Portrait Border" type="Panel" parent="Portrait" unique_id=2039977691]
+layout_mode = 0
+offset_top = -3.0
+offset_right = 87.0
+offset_bottom = 91.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_s015i")
+
+[node name="Label" type="Label" parent="." unique_id=1068416063]
+layout_mode = 0
+offset_left = 102.0
+offset_top = 23.0
+offset_right = 369.0
+offset_bottom = 68.0
+theme_override_font_sizes/font_size = 27
+text = "Placeholder Text idk"
+
+[node name="ScoreCounter" parent="." unique_id=1697585653 instance=ExtResource("4_4e6fx")]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.041
+anchor_top = 0.252
+anchor_right = 0.041
+anchor_bottom = 0.252
+offset_left = -20.232002
+offset_top = -44.296005
+offset_right = 19.267998
+offset_bottom = 43.703995
