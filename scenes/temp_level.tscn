@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b550g1dr7476e" path="res://scenes/player.tscn" id="1_sqah0"]
 [ext_resource type="Texture2D" uid="uid://cxlm3j5d8v1hh" path="res://assets/level/tilesheet_complete.png" id="2_ka4wd"]
-[ext_resource type="PackedScene" uid="uid://ccak0ix7wjxui" path="res://scenes/User Interface/player_hud.tscn" id="3_vcli0"]
+[ext_resource type="PackedScene" uid="uid://ccak0ix7wjxui" path="res://scenes/user_interface/player_hud.tscn" id="3_vcli0"]
 [ext_resource type="PackedScene" uid="uid://ch15dovngqxm3" path="res://scenes/enemy_director.tscn" id="4_kxde3"]
 [ext_resource type="PackedScene" uid="uid://btkb1qqfhvymi" path="res://scenes/enemy.tscn" id="4_vcli0"]
 [ext_resource type="AudioStream" uid="uid://4v5bejbvow1p" path="res://assets/sounds/curt-gun.mp3" id="6_vcli0"]
@@ -364,28 +364,9 @@ _maxMobCount = 5
 stream = ExtResource("6_vcli0")
 autoplay = true
 
-[node name="PlayerHud" parent="." unique_id=395627715 instance=ExtResource("3_vcli0")]
+[node name="PlayerHud" parent="." unique_id=395627715 node_paths=PackedStringArray("Player") instance=ExtResource("3_vcli0")]
 offset_left = 36.0
 offset_top = 422.0
-offset_right = 36.0
-offset_bottom = 422.0
-
-[node name="HealthBar" parent="PlayerHud" index="1" unique_id=1560013367 node_paths=PackedStringArray("_healthPool")]
-_healthPool = NodePath("../../Player/Health")
-
-[node name="AmmoPoolBar" parent="PlayerHud" index="2" unique_id=408888061 node_paths=PackedStringArray("_ammoPool")]
-_ammoPool = NodePath("../../Player/AmmoPool")
-
-[node name="ScoreCounter" parent="PlayerHud" index="5" unique_id=1697585653 node_paths=PackedStringArray("_enemyDirector")]
-anchor_left = 0.0
-anchor_top = 0.0
-anchor_right = 0.0
-anchor_bottom = 0.0
-offset_left = 28.0
-offset_top = 111.000015
-offset_right = 67.5
-offset_bottom = 199.00002
-_enemyDirector = NodePath("../../EnemyDirector")
-
-[editable path="Player"]
-[editable path="PlayerHud"]
+offset_right = -734.0
+offset_bottom = -18.0
+Player = NodePath("../Player")

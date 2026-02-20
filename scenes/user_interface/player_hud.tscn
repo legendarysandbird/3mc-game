@@ -1,7 +1,8 @@
 [gd_scene format=3 uid="uid://ccak0ix7wjxui"]
 
-[ext_resource type="PackedScene" uid="uid://cw3qtvla3nvo7" path="res://scenes/User Interface/health_bar.tscn" id="1_wnsji"]
-[ext_resource type="PackedScene" uid="uid://c3d3finkraelv" path="res://scenes/User Interface/ammo_pool_bar.tscn" id="2_4e6fx"]
+[ext_resource type="Script" uid="uid://bxqwylh12gaox" path="res://scripts/user_interface/PlayerHud.cs" id="1_384ni"]
+[ext_resource type="PackedScene" uid="uid://cw3qtvla3nvo7" path="res://scenes/user_interface/health_bar.tscn" id="1_wnsji"]
+[ext_resource type="PackedScene" uid="uid://c3d3finkraelv" path="res://scenes/user_interface/ammo_pool_bar.tscn" id="2_4e6fx"]
 [ext_resource type="Texture2D" uid="uid://6svx5ryhte6x" path="res://assets/player_temp/idle/character-IDLE-01.png" id="3_384ni"]
 [ext_resource type="PackedScene" uid="uid://b0u1ljkfsmaog" path="res://scenes/score_counter.tscn" id="4_4e6fx"]
 
@@ -22,8 +23,11 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
+offset_right = -770.0
+offset_bottom = -439.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_384ni")
 
 [node name="Background" type="ColorRect" parent="." unique_id=273992301]
 layout_mode = 0
@@ -37,19 +41,21 @@ offset_right = 382.0
 offset_bottom = 209.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_s015i")
 
-[node name="HealthBar" parent="." unique_id=1560013367 instance=ExtResource("1_wnsji")]
+[node name="HealthBar" parent="." unique_id=1560013367 node_paths=PackedStringArray("_healthPoolConnection") instance=ExtResource("1_wnsji")]
 layout_mode = 0
 offset_left = 92.0
 offset_top = 105.0
 offset_right = 376.0
 offset_bottom = 150.0
+_healthPoolConnection = NodePath("..")
 
-[node name="AmmoPoolBar" parent="." unique_id=408888061 instance=ExtResource("2_4e6fx")]
+[node name="AmmoPoolBar" parent="." unique_id=408888061 node_paths=PackedStringArray("_ammoPoolConnection") instance=ExtResource("2_4e6fx")]
 layout_mode = 0
 offset_left = 92.0
 offset_top = 157.0
 offset_right = 376.0
 offset_bottom = 202.0
+_ammoPoolConnection = NodePath("..")
 
 [node name="Portrait" type="Panel" parent="." unique_id=1139062616]
 layout_mode = 0
@@ -75,14 +81,15 @@ offset_bottom = 68.0
 theme_override_font_sizes/font_size = 27
 text = "Placeholder Text idk"
 
-[node name="ScoreCounter" parent="." unique_id=1697585653 instance=ExtResource("4_4e6fx")]
+[node name="ScoreCounter" parent="." unique_id=1697585653 node_paths=PackedStringArray("_playerHud") instance=ExtResource("4_4e6fx")]
 layout_mode = 1
 anchors_preset = -1
-anchor_left = 0.041
-anchor_top = 0.252
-anchor_right = 0.041
-anchor_bottom = 0.252
-offset_left = -20.232002
-offset_top = -44.296005
-offset_right = 19.267998
-offset_bottom = 43.703995
+anchor_left = 0.125
+anchor_top = 0.74600005
+anchor_right = 0.125
+anchor_bottom = 0.74600005
+offset_left = -19.750002
+offset_top = -43.914017
+offset_right = 19.75
+offset_bottom = 44.085983
+_playerHud = NodePath("..")
