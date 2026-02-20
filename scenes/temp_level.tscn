@@ -365,8 +365,13 @@ stream = ExtResource("6_vcli0")
 autoplay = true
 
 [node name="PlayerHud" parent="." unique_id=395627715 node_paths=PackedStringArray("Player") instance=ExtResource("3_vcli0")]
-offset_left = 36.0
-offset_top = 422.0
-offset_right = -734.0
-offset_bottom = -18.0
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 46.0
+offset_top = 413.0
+offset_right = -724.0
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 2
 Player = NodePath("../Player")

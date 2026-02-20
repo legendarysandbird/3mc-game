@@ -20,13 +20,10 @@ region_rect = Rect2(351.61145, 1.6509094, 356.08386, 332.4409)
 
 [node name="PlayerHud" type="Control" unique_id=395627715]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_right = -770.0
-offset_bottom = -439.0
-grow_horizontal = 2
-grow_vertical = 2
+anchor_right = 0.33200002
+anchor_bottom = 0.323
+offset_right = -0.46401978
+offset_bottom = -0.3040161
 script = ExtResource("1_384ni")
 
 [node name="Background" type="ColorRect" parent="." unique_id=273992301]
@@ -41,55 +38,45 @@ offset_right = 382.0
 offset_bottom = 209.0
 theme_override_styles/panel = SubResource("StyleBoxFlat_s015i")
 
-[node name="HealthBar" parent="." unique_id=1560013367 node_paths=PackedStringArray("_healthPoolConnection") instance=ExtResource("1_wnsji")]
-layout_mode = 0
-offset_left = 92.0
-offset_top = 105.0
-offset_right = 376.0
-offset_bottom = 150.0
-_healthPoolConnection = NodePath("..")
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=643286519]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 
-[node name="AmmoPoolBar" parent="." unique_id=408888061 node_paths=PackedStringArray("_ammoPoolConnection") instance=ExtResource("2_4e6fx")]
-layout_mode = 0
-offset_left = 92.0
-offset_top = 157.0
-offset_right = 376.0
-offset_bottom = 202.0
-_ammoPoolConnection = NodePath("..")
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=1986649534]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
 
-[node name="Portrait" type="Panel" parent="." unique_id=1139062616]
-layout_mode = 0
-offset_left = 7.0
-offset_top = 6.0
-offset_right = 98.0
-offset_bottom = 97.0
+[node name="Portrait" type="Panel" parent="HBoxContainer/VBoxContainer" unique_id=1139062616]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_csa7d")
 
-[node name="Portrait Border" type="Panel" parent="Portrait" unique_id=2039977691]
-layout_mode = 0
-offset_top = -3.0
-offset_right = 87.0
-offset_bottom = 91.0
-theme_override_styles/panel = SubResource("StyleBoxFlat_s015i")
+[node name="ScoreCounter" parent="HBoxContainer/VBoxContainer" unique_id=1697585653 node_paths=PackedStringArray("_playerHud") instance=ExtResource("4_4e6fx")]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+_playerHud = NodePath("../../..")
 
-[node name="Label" type="Label" parent="." unique_id=1068416063]
-layout_mode = 0
-offset_left = 102.0
-offset_top = 23.0
-offset_right = 369.0
-offset_bottom = 68.0
-theme_override_font_sizes/font_size = 27
-text = "Placeholder Text idk"
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer" unique_id=280561806]
+custom_minimum_size = Vector2(274, 0)
+layout_mode = 2
+alignment = 1
 
-[node name="ScoreCounter" parent="." unique_id=1697585653 node_paths=PackedStringArray("_playerHud") instance=ExtResource("4_4e6fx")]
-layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.125
-anchor_top = 0.74600005
-anchor_right = 0.125
-anchor_bottom = 0.74600005
-offset_left = -19.750002
-offset_top = -43.914017
-offset_right = 19.75
-offset_bottom = 44.085983
-_playerHud = NodePath("..")
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer2" unique_id=145660208]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+text = "Placeholder Text "
+horizontal_alignment = 1
+
+[node name="HealthBar" parent="HBoxContainer/VBoxContainer2" unique_id=1560013367 node_paths=PackedStringArray("_healthPoolConnection") instance=ExtResource("1_wnsji")]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+_healthPoolConnection = NodePath("../../..")
+
+[node name="AmmoPoolBar" parent="HBoxContainer/VBoxContainer2" unique_id=408888061 node_paths=PackedStringArray("_ammoPoolConnection") instance=ExtResource("2_4e6fx")]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+_ammoPoolConnection = NodePath("../../..")
