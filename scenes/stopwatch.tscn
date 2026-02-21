@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://bveoxqitaf7ko"]
+
+[ext_resource type="Script" uid="uid://ccicg48e0sdrr" path="res://scripts/logic/Stopwatch.cs" id="1_d33h4"]
+
+[node name="Stopwatch" type="Node" unique_id=1638115649]
+script = ExtResource("1_d33h4")
