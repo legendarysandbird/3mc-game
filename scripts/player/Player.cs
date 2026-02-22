@@ -3,14 +3,14 @@ using Godot;
 [GlobalClass]
 public partial class Player : CharacterBody2D
 {
-    private const float MoveSpeed = 200.0f;
-    private const float JumpVelocity = 700.0f;
-
     private readonly float _gravity = (float)ProjectSettings.GetSetting("physics/2d/default_gravity");
 
-    [Export] private int _rotationSpeed = 30;
-    [Export] private float _projectileSpeed = 300.0f;
+    [Export] private float _moveSpeed;
+    [Export] private float _jumpVelocity;
+    [Export] private int _rotationSpeed;
+    [Export] private float _projectileSpeed;
 
+    private Node2D? _armNode;
     private Node2D? _projectileSpawnNode;
     private Area2D? _hitbox;
     private Health? _healthPool;
@@ -25,6 +25,7 @@ public partial class Player : CharacterBody2D
 
     public override void _Ready()
     {
+        _armNode = GetNode<Node2D>("AnimatedSprite2D/Arm").NotNull(nameof(_projectileSpawnNode));
         _projectileSpawnNode = GetNode<Node2D>("AnimatedSprite2D/Arm/ProjectileSpawnPoint").NotNull(nameof(_projectileSpawnNode));
         _hitbox = GetNode<Area2D>("Hitbox").NotNull(nameof(_hitbox));
         _healthPool = GetNode<Health>("Health").NotNull(nameof(_healthPool));
@@ -71,11 +72,11 @@ public partial class Player : CharacterBody2D
 
         if (Input.IsActionPressed("player_jump") && IsJumpEligible())
         {
-            y -= JumpVelocity;
+            y -= _jumpVelocity;
             _jumpTimer.Start();
         }
 
-        x = Input.GetAxis("player_left", "player_right") * MoveSpeed;
+        x = Input.GetAxis("player_left", "player_right") * _moveSpeed;
 
         Velocity = new Vector2(x, y);
         MoveAndSlide();
@@ -86,18 +87,19 @@ public partial class Player : CharacterBody2D
     {
         _gunTimer.NotNull(nameof(_gunTimer));
         _ammoPool.NotNull(nameof(_ammoPool));
+        _armNode.NotNull(nameof(_armNode));
+        _projectileSpawnNode.NotNull(nameof(_projectileSpawnNode));
+
+        Vector2 sourcePosition = _armNode.GlobalPosition;
+        Vector2 projectileDirection = GetProjectileDirection(sourcePosition);
+        if (projectileDirection != Vector2.Zero)
+        {
+            ProjectileDirection = projectileDirection;
+        }
 
         if (!Input.IsActionPressed("fire") || _gunTimer.TimeLeft > 0 || _ammoPool.AmmoPoolValue < 1)
         {
             return;
-        }
-
-        _projectileSpawnNode.NotNull(nameof(_projectileSpawnNode));
-        Vector2 spawnPosition = _projectileSpawnNode.GlobalPosition;
-        Vector2 projectileDirection = GetProjectileDirection(spawnPosition);
-        if (projectileDirection != Vector2.Zero)
-        {
-            ProjectileDirection = projectileDirection;
         }
 
         _gunTimer.Start();
@@ -108,14 +110,14 @@ public partial class Player : CharacterBody2D
         _ammoPool.ChangeAmmoPoolValue(-1);
     }
 
-    private Vector2 GetProjectileDirection(Vector2 spawnPosition)
+    private Vector2 GetProjectileDirection(Vector2 sourcePosition)
     {
         var projectileDirection = Vector2.Zero;
 
         var mousePosition = GetGlobalMousePosition();
         if (_mousePosition != mousePosition)
         {
-            projectileDirection = mousePosition - spawnPosition;
+            projectileDirection = mousePosition - sourcePosition;
             _mousePosition = mousePosition;
         }
 

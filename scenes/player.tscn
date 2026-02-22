@@ -110,8 +110,11 @@ height = 146.0
 
 [node name="Player" type="CharacterBody2D" unique_id=1412289000]
 collision_layer = 2
-floor_snap_length = 5.0
+floor_snap_length = 11.0
 script = ExtResource("1_au5g1")
+_moveSpeed = 300.0
+_jumpVelocity = 700.0
+_rotationSpeed = 30
 _projectileSpeed = 600.0
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="." unique_id=724179298]
