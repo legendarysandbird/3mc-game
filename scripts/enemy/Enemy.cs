@@ -16,9 +16,9 @@ public partial class Enemy : CharacterBody2D
 
     public override void _Ready()
     {
-        _visibilityNotifier = GetNode<VisibleOnScreenNotifier2D>("VisibleOnScreenNotifier2D").GDNotNull(nameof(_visibilityNotifier));
-        _hitbox = GetNode<Area2D>("Hitbox").GDNotNull(nameof(_hitbox));
-        _healthPool = GetNode<Health>("Health").GDNotNull(nameof(_healthPool));
+        _visibilityNotifier = GetNode<VisibleOnScreenNotifier2D>("VisibleOnScreenNotifier2D").NotNull(nameof(_visibilityNotifier));
+        _hitbox = GetNode<Area2D>("Hitbox").NotNull(nameof(_hitbox));
+        _healthPool = GetNode<Health>("Health").NotNull(nameof(_healthPool));
         _player = (Player)GetTree().Root.FindChildren("*", nameof(Player), true, false)[0].NotNull(nameof(_player));
 
         _hitbox.AreaEntered += OnHitboxAreaEntered;

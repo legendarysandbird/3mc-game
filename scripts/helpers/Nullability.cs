@@ -4,16 +4,11 @@ using Godot;
 
 public static class NullHelpers
 {
-    public static T NotNull<T>([NotNull] this T? obj, string objName)
+    public static T NotNull<T>([NotNull] this T? node, string objName)
     {
-        return obj ?? throw new ArgumentNullException(objName);
-    }
-
-    public static T GDNotNull<T>([NotNull] this T? node, string nodeName) where T : GodotObject
-    {
-        if (node == null || !GodotObject.IsInstanceValid(node))
+        if (node == null || (node is GodotObject gdObject && !GodotObject.IsInstanceValid(gdObject)))
         {
-            throw new ArgumentNullException(nodeName);
+            throw new ArgumentNullException(objName);
         }
 
         return node;
