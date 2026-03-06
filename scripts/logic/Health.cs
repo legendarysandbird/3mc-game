@@ -8,7 +8,7 @@ public partial class Health : Node
     [Signal] public delegate void HealthEmptyEventHandler();
     [Signal] public delegate void HealthPoolChangedEventHandler();
 
-    public int HealthPool;
+    public int HealthPool { get; private set; }
 
     public override void _Ready()
     {

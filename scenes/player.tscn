@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://bob7uj4xse76u" path="res://assets/player_temp/idle/character-IDLE-03.png" id="4_a8ls1"]
 [ext_resource type="Texture2D" uid="uid://iqcs4yxeapmt" path="res://assets/player_temp/idle/character-IDLE-04.png" id="5_qfm1y"]
 [ext_resource type="Texture2D" uid="uid://v0bugacmj7j0" path="res://assets/player_temp/idle/character-IDLE-05.png" id="6_fulsm"]
-[ext_resource type="Script" uid="uid://bedm18bstlp8w" path="res://scripts/player/PlayerAnimation.cs" id="6_xqplr"]
 [ext_resource type="Texture2D" uid="uid://bkjv3ienauqar" path="res://assets/player_temp/idle/character-IDLE-06.png" id="7_4r5pv"]
 [ext_resource type="Texture2D" uid="uid://cdqn2t8avddst" path="res://assets/player_temp/walk/character-LR-move-01.png" id="8_60mlk"]
 [ext_resource type="Texture2D" uid="uid://bu53fnet8g1sp" path="res://assets/player_temp/walk/character-LR-move-02.png" id="9_i4ail"]
@@ -121,7 +120,6 @@ _projectileSpeed = 600.0
 scale = Vector2(0.15, 0.15)
 sprite_frames = SubResource("SpriteFrames_tc6bn")
 animation = &"idle"
-script = ExtResource("6_xqplr")
 
 [node name="Arm" type="AnimatedSprite2D" parent="AnimatedSprite2D" unique_id=448227381]
 position = Vector2(-106.667, -146.667)

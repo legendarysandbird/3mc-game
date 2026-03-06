@@ -3,8 +3,18 @@ using Godot;
 [GlobalClass]
 public partial class Player : CharacterBody2D
 {
+    private const string LEFT_ACTION = "left";
+    private const string RIGHT_ACTION = "right";
+    private const string FIRE_ACTION = "fire";
+    private const string JUMP_ACTION = "jump";
+    private const string AIM_LEFT_ACTION = "aim_left";
+    private const string AIM_RIGHT_ACTION = "aim_right";
+    private const string AIM_UP_ACTION = "aim_up";
+    private const string AIM_DOWN_ACTION = "aim_down";
+
     private readonly float _gravity = (float)ProjectSettings.GetSetting("physics/2d/default_gravity");
 
+    [Export] public int _playerNumber;
     [Export] private float _moveSpeed;
     [Export] private float _jumpVelocity;
     [Export] private int _rotationSpeed;
@@ -17,14 +27,17 @@ public partial class Player : CharacterBody2D
     private AmmoPool? _ammoPool;
     private Timer? _jumpTimer;
     private Timer? _gunTimer;
+    private AnimatedSprite2D? _animator;
+
     private Vector2 _mousePosition;
     private Vector2 _stickDirection;
+    private float _animatorXScaleCache;
 
     public Vector2 ProjectileDirection { get; private set; }
 
-
     public override void _Ready()
     {
+        _playerNumber.IsInitialized(nameof(_playerNumber));
         _armNode = GetNode<Node2D>("AnimatedSprite2D/Arm").NotNull(nameof(_projectileSpawnNode));
         _projectileSpawnNode = GetNode<Node2D>("AnimatedSprite2D/Arm/ProjectileSpawnPoint").NotNull(nameof(_projectileSpawnNode));
         _hitbox = GetNode<Area2D>("Hitbox").NotNull(nameof(_hitbox));
@@ -32,8 +45,11 @@ public partial class Player : CharacterBody2D
         _ammoPool = GetNode<AmmoPool>("AmmoPool").NotNull(nameof(_ammoPool));
         _jumpTimer = GetNode<Timer>("JumpTimer").NotNull(nameof(_jumpTimer));
         _gunTimer = GetNode<Timer>("GunTimer").NotNull(nameof(_gunTimer));
-        _mousePosition = GetGlobalMousePosition();
+        _animator = GetNode<AnimatedSprite2D>("AnimatedSprite2D").NotNull(nameof(_animator));
+
+        _mousePosition = InputManager.Instance.GetGlobalMousePosition(_playerNumber, this);
         ProjectileDirection = Vector2.Right;
+        _animatorXScaleCache = _animator.Scale.X;
 
         _hitbox.BodyEntered += OnHitboxBodyEntered;
         _healthPool.HealthEmpty += OnHealthPoolEmpty;
@@ -43,12 +59,7 @@ public partial class Player : CharacterBody2D
     {
         MovePlayer(delta);
         HandleShooting();
-    }
-
-    private void RotatePlayer(double delta)
-    {
-        float targetRotation = IsOnFloor() ? GetFloorNormal().X : 0;
-        Rotation = Mathf.Lerp(Rotation, targetRotation, (float)delta * _rotationSpeed);
+        UpdateAnimations(delta);
     }
 
     private bool IsJumpEligible()
@@ -70,17 +81,16 @@ public partial class Player : CharacterBody2D
             y += _gravity * (float)delta;
         }
 
-        if (Input.IsActionPressed("player_jump") && IsJumpEligible())
+        if (InputManager.Instance.IsActionPressed(_playerNumber, JUMP_ACTION) && IsJumpEligible())
         {
             y -= _jumpVelocity;
             _jumpTimer.Start();
         }
 
-        x = Input.GetAxis("player_left", "player_right") * _moveSpeed;
+        x = InputManager.Instance.GetAxis(_playerNumber, LEFT_ACTION, RIGHT_ACTION) * _moveSpeed;
 
         Velocity = new Vector2(x, y);
         MoveAndSlide();
-        RotatePlayer(delta);
     }
 
     private void HandleShooting()
@@ -97,7 +107,7 @@ public partial class Player : CharacterBody2D
             ProjectileDirection = projectileDirection;
         }
 
-        if (!Input.IsActionPressed("fire") || _gunTimer.TimeLeft > 0 || _ammoPool.AmmoPoolValue < 1)
+        if (!InputManager.Instance.IsActionPressed(_playerNumber, FIRE_ACTION) || _gunTimer.TimeLeft > 0 || _ammoPool.AmmoPoolValue < 1)
         {
             return;
         }
@@ -114,14 +124,14 @@ public partial class Player : CharacterBody2D
     {
         var projectileDirection = Vector2.Zero;
 
-        var mousePosition = GetGlobalMousePosition();
+        var mousePosition = InputManager.Instance.GetGlobalMousePosition(_playerNumber, this);
         if (_mousePosition != mousePosition)
         {
             projectileDirection = mousePosition - sourcePosition;
             _mousePosition = mousePosition;
         }
 
-        var stickDirection = Input.GetVector("player_aim_left", "player_aim_right", "player_aim_up", "player_aim_down");
+        var stickDirection = InputManager.Instance.GetVector(_playerNumber, AIM_LEFT_ACTION, AIM_RIGHT_ACTION, AIM_UP_ACTION, AIM_DOWN_ACTION);
         if (_stickDirection != stickDirection)
         {
             projectileDirection = stickDirection;
@@ -129,6 +139,43 @@ public partial class Player : CharacterBody2D
         }
 
         return projectileDirection.Normalized();
+    }
+
+    private void UpdateAnimations(double delta)
+    {
+        RotatePlayer(delta);
+        UpdateAnimator();
+        AnimateArm();
+    }
+
+    private void RotatePlayer(double delta)
+    {
+        float targetRotation = IsOnFloor() ? GetFloorNormal().X : 0;
+        Rotation = Mathf.Lerp(Rotation, targetRotation, (float)delta * _rotationSpeed);
+    }
+
+    private void UpdateAnimator()
+    {
+        _animator.NotNull(nameof(_animator));
+
+        bool isLeftPressed = InputManager.Instance.IsActionPressed(_playerNumber, LEFT_ACTION);
+        bool isRightPressed = InputManager.Instance.IsActionPressed(_playerNumber, RIGHT_ACTION);
+        if (isLeftPressed == isRightPressed)
+        {
+            _animator.Animation = "idle";
+            return;
+        }
+
+        _animator.Animation = "walk";
+
+        bool movingLeft = isLeftPressed;
+        _animator.Scale = _animator.Scale with { X = _animatorXScaleCache * (movingLeft ? -1 : 1) };
+    }
+
+    private void AnimateArm()
+    {
+        _armNode.NotNull(nameof(_armNode));
+        _armNode.LookAt(_armNode.GlobalPosition + ProjectileDirection);
     }
 
     private void OnHitboxBodyEntered(Node2D body)

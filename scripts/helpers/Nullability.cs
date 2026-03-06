@@ -4,13 +4,29 @@ using Godot;
 
 public static class NullHelpers
 {
-    public static T NotNull<T>([NotNull] this T? node, string objName)
+    public static T NotNull<T>([NotNull] this T? obj, string objName)
     {
-        if (node == null || (node is GodotObject gdObject && !GodotObject.IsInstanceValid(gdObject)))
+        if (obj == null)
         {
             throw new ArgumentNullException(objName);
         }
 
-        return node;
+        if (obj is GodotObject gdObject && !GodotObject.IsInstanceValid(gdObject))
+        {
+            throw new ArgumentException($"{objName} is not a valid instance!");
+        }
+
+        return obj;
+    }
+
+    public static T IsInitialized<T>([NotNull] this T? obj, string objName)
+    {
+        var def = default(T);
+        if (def != null && def.Equals(obj))
+        {
+            throw new ArgumentException($"{objName} has not been initialized!");
+        }
+
+        return obj.NotNull(objName);
     }
 }

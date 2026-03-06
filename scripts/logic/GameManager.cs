@@ -3,12 +3,20 @@ using Godot;
 
 public partial class GameManager : Node
 {
+    public enum PlayerMode
+    {
+        SinglePlayer,
+        LocalMultiplayer
+    }
+
     public const string CurrentSeedEntry = "currentSeed";
 
     private PackedScene? _sceneTempLevel;
     private MainMenu? _mainMenu;
 
     private readonly Dictionary<string, int> _gameInfo = new Dictionary<string, int> { { CurrentSeedEntry, 0 } };
+
+    private PlayerMode _playerMode;
 
     public override void _Ready()
     {
@@ -19,10 +27,17 @@ public partial class GameManager : Node
         _mainMenu.PlayPressed += OnMainMenuPlayPressed;
     }
 
-    private void OnMainMenuPlayPressed()
+    private void OnMainMenuPlayPressed(PlayerMode playerMode)
     {
         _sceneTempLevel.NotNull(nameof(_sceneTempLevel));
         _mainMenu.NotNull(nameof(_mainMenu));
+
+        _playerMode = playerMode;
+
+        if (playerMode == PlayerMode.LocalMultiplayer)
+        {
+            InputManager.Instance.SetDeviceMap(new InputDevice[] { new InputDevice(0, true), new InputDevice(1, false) });
+        }
 
         Node tempLevel = _sceneTempLevel.Instantiate();
         GetTree().Root.AddChild(tempLevel);

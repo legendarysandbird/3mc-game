@@ -354,6 +354,7 @@ zoom = Vector2(0.5, 0.6)
 
 [node name="Player" parent="." unique_id=1605467493 instance=ExtResource("1_sqah0")]
 position = Vector2(386, 280)
+_playerNumber = 1
 
 [node name="EnemyDirector" parent="." unique_id=1714727607 node_paths=PackedStringArray("_spawnNode") instance=ExtResource("4_kxde3")]
 _mobTypes = Array[PackedScene]([ExtResource("4_vcli0")])
