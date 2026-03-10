@@ -1,0 +1,82 @@
+[gd_scene format=3 uid="uid://ccak0ix7wjxui"]
+
+[ext_resource type="Script" uid="uid://bxqwylh12gaox" path="res://scripts/user_interface/PlayerHud.cs" id="1_384ni"]
+[ext_resource type="PackedScene" uid="uid://cw3qtvla3nvo7" path="res://scenes/user_interface/health_bar.tscn" id="1_wnsji"]
+[ext_resource type="PackedScene" uid="uid://c3d3finkraelv" path="res://scenes/user_interface/ammo_pool_bar.tscn" id="2_4e6fx"]
+[ext_resource type="Texture2D" uid="uid://6svx5ryhte6x" path="res://assets/player_temp/idle/character-IDLE-01.png" id="3_384ni"]
+[ext_resource type="PackedScene" uid="uid://b0u1ljkfsmaog" path="res://scenes/score_counter.tscn" id="4_4e6fx"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_s015i"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 1
+border_width_top = 1
+border_width_right = 1
+border_width_bottom = 1
+border_color = Color(0, 0, 0, 1)
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_csa7d"]
+texture = ExtResource("3_384ni")
+region_rect = Rect2(351.61145, 1.6509094, 356.08386, 332.4409)
+
+[node name="PlayerHud" type="Control" unique_id=395627715]
+layout_mode = 3
+anchor_right = 0.33200002
+anchor_bottom = 0.323
+offset_right = -0.46401978
+offset_bottom = -0.3040161
+script = ExtResource("1_384ni")
+
+[node name="Background" type="ColorRect" parent="." unique_id=273992301]
+layout_mode = 0
+offset_right = 382.0
+offset_bottom = 209.0
+color = Color(0.17254902, 0.17254902, 0.17254902, 0.5019608)
+
+[node name="Background Border" type="Panel" parent="Background" unique_id=1055828762]
+layout_mode = 0
+offset_right = 382.0
+offset_bottom = 209.0
+theme_override_styles/panel = SubResource("StyleBoxFlat_s015i")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=643286519]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=1986649534]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+
+[node name="Portrait" type="Panel" parent="HBoxContainer/VBoxContainer" unique_id=1139062616]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_csa7d")
+
+[node name="ScoreCounter" parent="HBoxContainer/VBoxContainer" unique_id=1697585653 node_paths=PackedStringArray("_playerHud") instance=ExtResource("4_4e6fx")]
+custom_minimum_size = Vector2(0, 100)
+layout_mode = 2
+_playerHud = NodePath("../../..")
+
+[node name="VBoxContainer2" type="VBoxContainer" parent="HBoxContainer" unique_id=280561806]
+custom_minimum_size = Vector2(274, 0)
+layout_mode = 2
+alignment = 1
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer2" unique_id=145660208]
+layout_mode = 2
+theme_override_font_sizes/font_size = 33
+text = "Placeholder Text "
+horizontal_alignment = 1
+
+[node name="HealthBar" parent="HBoxContainer/VBoxContainer2" unique_id=1560013367 node_paths=PackedStringArray("_healthPoolConnection") instance=ExtResource("1_wnsji")]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+_healthPoolConnection = NodePath("../../..")
+
+[node name="AmmoPoolBar" parent="HBoxContainer/VBoxContainer2" unique_id=408888061 node_paths=PackedStringArray("_ammoPoolConnection") instance=ExtResource("2_4e6fx")]
+custom_minimum_size = Vector2(0, 50)
+layout_mode = 2
+_ammoPoolConnection = NodePath("../../..")

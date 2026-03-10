@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://b550g1dr7476e" path="res://scenes/player.tscn" id="1_sqah0"]
 [ext_resource type="Texture2D" uid="uid://cxlm3j5d8v1hh" path="res://assets/level/tilesheet_complete.png" id="2_ka4wd"]
-[ext_resource type="PackedScene" uid="uid://b0u1ljkfsmaog" path="res://scenes/score_counter.tscn" id="4_7hwuv"]
+[ext_resource type="PackedScene" uid="uid://ccak0ix7wjxui" path="res://scenes/user_interface/player_hud.tscn" id="3_vcli0"]
 [ext_resource type="PackedScene" uid="uid://ch15dovngqxm3" path="res://scenes/enemy_director.tscn" id="4_kxde3"]
 [ext_resource type="PackedScene" uid="uid://btkb1qqfhvymi" path="res://scenes/enemy.tscn" id="4_vcli0"]
 [ext_resource type="AudioStream" uid="uid://4v5bejbvow1p" path="res://assets/sounds/curt-gun.mp3" id="6_vcli0"]
@@ -323,7 +323,7 @@ _data = {
 }
 point_count = 7
 
-[node name="Temp_Level" type="Node" unique_id=1965360753]
+[node name="TempLevel" type="Node" unique_id=1965360753]
 
 [node name="World" type="Node" parent="." unique_id=2061985760]
 
@@ -360,13 +360,18 @@ _mobTypes = Array[PackedScene]([ExtResource("4_vcli0")])
 _spawnNode = NodePath("../World/SpawnPath/SpawnNode")
 _maxMobCount = 5
 
-[node name="ScoreCounter" parent="." unique_id=1111749001 node_paths=PackedStringArray("_enemyDirector") instance=ExtResource("4_7hwuv")]
-offset_left = -383.0
-offset_top = 136.0
-offset_right = -346.0
-offset_bottom = 224.0
-_enemyDirector = NodePath("../EnemyDirector")
-
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="." unique_id=1515755730]
 stream = ExtResource("6_vcli0")
 autoplay = true
+
+[node name="PlayerHud" parent="." unique_id=395627715 node_paths=PackedStringArray("Player") instance=ExtResource("3_vcli0")]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 46.0
+offset_top = 413.0
+offset_right = -724.0
+offset_bottom = -26.0
+grow_horizontal = 2
+grow_vertical = 2
+Player = NodePath("../Player")
