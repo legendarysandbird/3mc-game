@@ -36,7 +36,19 @@ public partial class GameManager : Node
 
         if (playerMode == PlayerMode.LocalMultiplayer)
         {
-            InputManager.Instance.SetDeviceMap(new InputDevice[] { new InputDevice(0, true), new InputDevice(1, false) });
+            const int numberOfPlayers = 2;
+
+            var inputManager = InputManager.Instance;
+            int connectedDeviceCount = inputManager.GetConnectedDeviceCount();
+            if (connectedDeviceCount >= numberOfPlayers)
+            {
+                inputManager.SetMultiplayerMapping(numberOfPlayers);
+            }
+            else
+            {
+                Logger.Info($"Not enough devices connected! Attempted player count: {numberOfPlayers}. Connected device count: {connectedDeviceCount}.");
+                return;
+            }
         }
 
         Node tempLevel = _sceneTempLevel.Instantiate();

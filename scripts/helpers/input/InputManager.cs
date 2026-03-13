@@ -1,13 +1,28 @@
+// #define LOG_INPUT_MANAGER
+
+using System.Diagnostics;
+using System.Linq;
 using Godot;
 
 [GlobalClass]
 public partial class InputManager : Node
 {
+    public const string LEFT_ACTION = "player_left";
+    public const string RIGHT_ACTION = "player_right";
+    public const string FIRE_ACTION = "player_fire";
+    public const string JUMP_ACTION = "player_jump";
+    public const string AIM_LEFT_ACTION = "player_aim_left";
+    public const string AIM_RIGHT_ACTION = "player_aim_right";
+    public const string AIM_UP_ACTION = "player_aim_up";
+    public const string AIM_DOWN_ACTION = "player_aim_down";
+
+    private const int GODOT_MAX_DEVICE_COUNT = 8;
+
     private static InputManager? _instance;
     public static InputManager Instance => _instance.NotNull(nameof(_instance));
 
-    private bool _isPairing;
-    private DeviceMap? _deviceMap;
+    private bool _isMultiplayerMappingActive;
+    private InputDevice?[] _connectedDevices = new InputDevice[GODOT_MAX_DEVICE_COUNT];
 
     public override void _Ready()
     {
@@ -18,25 +33,104 @@ public partial class InputManager : Node
 
     public override void _Input(InputEvent inputEvent)
     {
-        HandlePairingAttempt(inputEvent);
+        if (inputEvent is InputEventMouseMotion)
+        {
+            return;
+        }
+
+        int device = inputEvent.Device;
+        if (device >= GODOT_MAX_DEVICE_COUNT)
+        {
+            LogInfo($"Skipping device with ID of {device}.");
+            return;
+        }
+
+        PairDevice(device, inputEvent);
     }
 
-    public void SetDeviceMap(InputDevice[] inputDevices)
+    public int GetConnectedDeviceCount() => _connectedDevices.Count(device => device != null);
+
+    public void SetMultiplayerMapping(int playerCount)
     {
-        _deviceMap = new DeviceMap(inputDevices);
+        int connectedDeviceCount = GetConnectedDeviceCount();
+        Debug.Assert(connectedDeviceCount >= playerCount);
+
+        var originalActions = InputMap.GetActions();
+        foreach (var action in originalActions)
+        {
+            if (action.ToString().StartsWith("ui_"))
+            {
+                continue;
+            }
+
+            for (int playerIndex = 0; playerIndex < playerCount; playerIndex++)
+            {
+                string newActionName = $"{action}_{playerIndex + 1}";
+                InputMap.AddAction(newActionName);
+
+                var inputDevice = _connectedDevices[playerIndex];
+                Debug.Assert(inputDevice != null);
+
+                bool isKeyboard = inputDevice.IsKeyboard;
+                var originalEvents = InputMap.ActionGetEvents(action);
+                foreach (var inputEvent in originalEvents)
+                {
+                    if (isKeyboard)
+                    {
+                        if (inputEvent is not (InputEventKey or InputEventMouseButton))
+                        {
+                            continue;
+                        }
+                    }
+                    else if (inputEvent is not (InputEventJoypadButton or InputEventJoypadMotion))
+                    {
+                        continue;
+                    }
+
+                    var newInputEvent = (InputEvent)inputEvent.Duplicate();
+                    newInputEvent.Device = playerIndex;
+                    InputMap.ActionAddEvent(newActionName, newInputEvent);
+                }
+            }
+
+            InputMap.EraseAction(action);
+        }
+
+        foreach (var action in InputMap.GetActions())
+        {
+            if (action.ToString().StartsWith("ui_"))
+            {
+                continue;
+            }
+
+            foreach (var inputEvent in InputMap.ActionGetEvents(action))
+            {
+                LogInfo($"Event: {inputEvent.AsText()}. Device: {inputEvent.Device}");
+            }
+        }
+
+        _isMultiplayerMappingActive = true;
+
+        LogInfo($"Setting multiplayer mapping for {playerCount} players!");
     }
 
-    public void ClearDeviceMap()
+    public void ResetMapping()
     {
-        _deviceMap = null;
+        InputMap.LoadFromProjectSettings();
+        _isMultiplayerMappingActive = false;
+
+        LogInfo("Restoring Input Map to project settings!");
     }
 
-    public bool IsActionPressed(int playerNumber, string action) => ShouldBlockInput(playerNumber, action) ? false : Input.IsActionPressed($"player_{action}");
+    public bool IsActionPressed(int playerNumber, string action)
+    {
+        return Input.IsActionPressed(GetActionStringName(playerNumber, action));
+    }
 
     public float GetAxis(int playerNumber, string negativeAction, string positiveAction)
     {
-        float negativeActionStrength = ShouldBlockInput(playerNumber, negativeAction) ? 0.0f : Input.GetActionStrength($"player_{negativeAction}");
-        float positiveActionStrength = ShouldBlockInput(playerNumber, positiveAction) ? 0.0f : Input.GetActionStrength($"player_{positiveAction}");
+        float negativeActionStrength = GetPlayerActionStrength(playerNumber, negativeAction);
+        float positiveActionStrength = GetPlayerActionStrength(playerNumber, positiveAction);
 
         return positiveActionStrength - negativeActionStrength;
     }
@@ -56,7 +150,7 @@ public partial class InputManager : Node
             return Vector2.Zero;
         }
 
-        if (_deviceMap != null && !IsPlayerUsingMouse(playerNumber, _deviceMap))
+        if (!IsPlayerUsingKeyboard(playerNumber))
         {
             return Vector2.Zero;
         }
@@ -64,139 +158,66 @@ public partial class InputManager : Node
         return caller.GetGlobalMousePosition();
     }
 
-    private bool ShouldBlockInput(int playerNumber, string action)
+    private float GetPlayerActionStrength(int playerNumber, string action)
     {
-        var actionEvents = InputMap.ActionGetEvents(action);
-
-        if (ConfigHelper.GetMouseAndKeyboardDisabled())
-        {
-            if (IsKeyboardInput(actionEvents))
-            {
-                return true;
-            }
-        }
-
-        if (_deviceMap != null && !IsEventFromPlayer(playerNumber, _deviceMap, actionEvents))
-        {
-            return true;
-        }
-
-        return false;
+        return Input.GetActionStrength(GetActionStringName(playerNumber, action));
     }
 
-    private bool IsKeyboardInput(Godot.Collections.Array<InputEvent> actionEvents)
+    private string GetActionStringName(int playerNumber, string action)
     {
-        foreach (var actionEvent in actionEvents)
-        {
-            if (actionEvent is not (InputEventKey or InputEventMouseButton))
-            {
-                return false;
-            }
-        }
-
-        return true;
+        return _isMultiplayerMappingActive ? $"{action}_{playerNumber}" : action;
     }
 
-    private static bool IsEventFromPlayer(int playerNumber, DeviceMap deviceMap, Godot.Collections.Array<InputEvent> actionEvents)
+    private bool IsPlayerUsingKeyboard(int playerNumber)
     {
-        var playerDevice = GetInputDevice(playerNumber, deviceMap);
-        if (playerDevice == null)
-        {
-            return false;
-        }
-
-        foreach (var actionEvent in actionEvents)
-        {
-            if (actionEvent.Device == playerDevice.DeviceId)
-            {
-                return false;
-            }
-        }
-
-        return true;
-    }
-
-    private static bool IsPlayerUsingMouse(int playerNumber, DeviceMap deviceMap)
-    {
-        var playerDevice = GetInputDevice(playerNumber, deviceMap);
+        var playerDevice = _connectedDevices[playerNumber - 1];
         return playerDevice != null && playerDevice.IsKeyboard;
-    }
-
-    private static InputDevice? GetInputDevice(int playerNumber, DeviceMap deviceMap)
-    {
-        if (playerNumber < 1 || playerNumber > DeviceMap.MAX_DEVICE_COUNT)
-        {
-            Logger.Error($"Player number of {playerNumber} is not valid!");
-            return null;
-        }
-
-        var playerDevice = deviceMap.GetPlayerDevice(playerNumber);
-        return playerDevice;
     }
 
     private void OnJoyConnectionChanged(long device, bool connected)
     {
-        var deviceName = Input.GetJoyName((int)device);
+        if (device >= GODOT_MAX_DEVICE_COUNT)
+        {
+            LogInfo($"Skipping device with ID of {device}.");
+            return;
+        }
+
         if (connected)
         {
-            Logger.Info($"Device {device} with name {deviceName} connected!");
+            var deviceName = Input.GetJoyName((int)device);
+            LogInfo($"Device {device} with name {deviceName} detected!");
         }
         else
         {
-            if (_deviceMap != null && _deviceMap.HasDevice((int)device))
-            {
-                _deviceMap.RemoveDevice((int)device);
-                _isPairing = true;
-            }
-
-            Logger.Info($"Device {device} with name {deviceName} disconnected!");
+            var deviceName = _connectedDevices[device]?.Name;
+            _connectedDevices[device] = null;
+            LogInfo($"Device {device} with name {deviceName} disconnected!");
         }
     }
 
-    private void HandlePairingAttempt(InputEvent inputEvent)
+    private void PairDevice(int device, InputEvent inputEvent)
     {
-        if (!_isPairing)
+        if (_connectedDevices[device] != null)
+        {
+            // Device already paired
+            return;
+        }
+
+        if (inputEvent is InputEventMouseButton)
         {
             return;
         }
 
-        if (_deviceMap == null)
-        {
-            Logger.Error("Trying to pair devices but we have no device map!");
-            return;
-        }
+        bool isKeyboard = inputEvent is InputEventKey;
+        _connectedDevices[device] = new InputDevice(device, isKeyboard);
 
-        if (_deviceMap.IsFull())
-        {
-            Logger.Error("Trying to pair in game, but the device map is full!");
-            return;
-        }
+        var deviceName = Input.GetJoyName((int)device);
+        LogInfo($"Device {device} with name {deviceName} connected!");
+    }
 
-        int device = inputEvent.Device;
-        if (_deviceMap.HasDevice(device))
-        {
-            return;
-        }
-
-        if (inputEvent is InputEventKey)
-        {
-            if (ConfigHelper.GetMouseAndKeyboardDisabled() || _deviceMap.IsKeyboardAlreadyInUse())
-            {
-                return;
-            }
-            else
-            {
-                _deviceMap.AddDevice(new InputDevice(device, true));
-            }
-        }
-        else if (inputEvent is InputEventJoypadButton)
-        {
-            _deviceMap.AddDevice(new InputDevice(device, false));
-        }
-
-        if (_isPairing && _deviceMap.IsFull())
-        {
-            _isPairing = false;
-        }
+    [Conditional("LOG_INPUT_MANAGER")]
+    private void LogInfo(params object[] message)
+    {
+        Logger.Info(message);
     }
 }

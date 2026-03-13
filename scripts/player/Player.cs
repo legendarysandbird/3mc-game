@@ -3,15 +3,6 @@ using Godot;
 [GlobalClass]
 public partial class Player : CharacterBody2D
 {
-    private const string LEFT_ACTION = "left";
-    private const string RIGHT_ACTION = "right";
-    private const string FIRE_ACTION = "fire";
-    private const string JUMP_ACTION = "jump";
-    private const string AIM_LEFT_ACTION = "aim_left";
-    private const string AIM_RIGHT_ACTION = "aim_right";
-    private const string AIM_UP_ACTION = "aim_up";
-    private const string AIM_DOWN_ACTION = "aim_down";
-
     private readonly float _gravity = (float)ProjectSettings.GetSetting("physics/2d/default_gravity");
 
     [Export] public int _playerNumber;
@@ -81,13 +72,13 @@ public partial class Player : CharacterBody2D
             y += _gravity * (float)delta;
         }
 
-        if (InputManager.Instance.IsActionPressed(_playerNumber, JUMP_ACTION) && IsJumpEligible())
+        if (InputManager.Instance.IsActionPressed(_playerNumber, InputManager.JUMP_ACTION) && IsJumpEligible())
         {
             y -= _jumpVelocity;
             _jumpTimer.Start();
         }
 
-        x = InputManager.Instance.GetAxis(_playerNumber, LEFT_ACTION, RIGHT_ACTION) * _moveSpeed;
+        x = InputManager.Instance.GetAxis(_playerNumber, InputManager.LEFT_ACTION, InputManager.RIGHT_ACTION) * _moveSpeed;
 
         Velocity = new Vector2(x, y);
         MoveAndSlide();
@@ -107,7 +98,7 @@ public partial class Player : CharacterBody2D
             ProjectileDirection = projectileDirection;
         }
 
-        if (!InputManager.Instance.IsActionPressed(_playerNumber, FIRE_ACTION) || _gunTimer.TimeLeft > 0 || _ammoPool.AmmoPoolValue < 1)
+        if (!InputManager.Instance.IsActionPressed(_playerNumber, InputManager.FIRE_ACTION) || _gunTimer.TimeLeft > 0 || _ammoPool.AmmoPoolValue < 1)
         {
             return;
         }
@@ -131,7 +122,7 @@ public partial class Player : CharacterBody2D
             _mousePosition = mousePosition;
         }
 
-        var stickDirection = InputManager.Instance.GetVector(_playerNumber, AIM_LEFT_ACTION, AIM_RIGHT_ACTION, AIM_UP_ACTION, AIM_DOWN_ACTION);
+        var stickDirection = InputManager.Instance.GetVector(_playerNumber, InputManager.AIM_LEFT_ACTION, InputManager.AIM_RIGHT_ACTION, InputManager.AIM_UP_ACTION, InputManager.AIM_DOWN_ACTION);
         if (_stickDirection != stickDirection)
         {
             projectileDirection = stickDirection;
@@ -158,8 +149,8 @@ public partial class Player : CharacterBody2D
     {
         _animator.NotNull(nameof(_animator));
 
-        bool isLeftPressed = InputManager.Instance.IsActionPressed(_playerNumber, LEFT_ACTION);
-        bool isRightPressed = InputManager.Instance.IsActionPressed(_playerNumber, RIGHT_ACTION);
+        bool isLeftPressed = InputManager.Instance.IsActionPressed(_playerNumber, InputManager.LEFT_ACTION);
+        bool isRightPressed = InputManager.Instance.IsActionPressed(_playerNumber, InputManager.RIGHT_ACTION);
         if (isLeftPressed == isRightPressed)
         {
             _animator.Animation = "idle";
