@@ -3,13 +3,9 @@ using Godot;
 [GlobalClass]
 public partial class Player : CharacterBody2D
 {
-    private readonly float _gravity = (float)ProjectSettings.GetSetting("physics/2d/default_gravity");
+    private static readonly PackedScene _playerScene = GD.Load<PackedScene>("uid://b550g1dr7476e");
 
-    [Export] public int _playerNumber;
-    [Export] private float _moveSpeed;
-    [Export] private float _jumpVelocity;
-    [Export] private int _rotationSpeed;
-    [Export] private float _projectileSpeed;
+    private readonly float _gravity = (float)ProjectSettings.GetSetting("physics/2d/default_gravity");
 
     private Node2D? _armNode;
     private Node2D? _projectileSpawnNode;
@@ -19,6 +15,12 @@ public partial class Player : CharacterBody2D
     private Timer? _jumpTimer;
     private Timer? _gunTimer;
     private AnimatedSprite2D? _animator;
+
+    private int _playerNumber;
+    private float _moveSpeed;
+    private float _jumpVelocity;
+    private int _rotationSpeed;
+    private float _projectileSpeed;
 
     private Vector2 _mousePosition;
     private Vector2 _stickDirection;
@@ -51,6 +53,19 @@ public partial class Player : CharacterBody2D
         MovePlayer(delta);
         HandleShooting();
         UpdateAnimations(delta);
+    }
+
+    public static Player Create(int playerNumber, Vector2 startingPosition, float moveSpeed, float jumpVelocity, int rotationSpeed, float projectileSpeed)
+    {
+        Player player = _playerScene.Instantiate<Player>();
+        player._playerNumber = playerNumber;
+        player._moveSpeed = moveSpeed;
+        player._jumpVelocity = jumpVelocity;
+        player._rotationSpeed = rotationSpeed;
+        player._projectileSpeed = projectileSpeed;
+        player.GlobalPosition = startingPosition;
+
+        return player;
     }
 
     private bool IsJumpEligible()

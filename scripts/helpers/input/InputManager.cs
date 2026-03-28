@@ -53,7 +53,13 @@ public partial class InputManager : Node
     public void SetMultiplayerMapping(int playerCount)
     {
         int connectedDeviceCount = GetConnectedDeviceCount();
-        Debug.Assert(connectedDeviceCount >= playerCount);
+        LogInfo(connectedDeviceCount, playerCount);
+
+        if (connectedDeviceCount < playerCount)
+        {
+            Logger.Error($"Connected device count of {connectedDeviceCount} is less than player count of {playerCount}!");
+            return;
+        }
 
         var originalActions = InputMap.GetActions();
         foreach (var action in originalActions)
@@ -63,13 +69,17 @@ public partial class InputManager : Node
                 continue;
             }
 
-            for (int playerIndex = 0; playerIndex < playerCount; playerIndex++)
+            int playerNumber = 1;
+            for (int deviceIndex = 0; deviceIndex < _connectedDevices.Length && playerNumber <= playerCount; deviceIndex++)
             {
-                string newActionName = $"{action}_{playerIndex + 1}";
-                InputMap.AddAction(newActionName);
+                var inputDevice = _connectedDevices[deviceIndex];
+                if (inputDevice == null)
+                {
+                    continue;
+                }
 
-                var inputDevice = _connectedDevices[playerIndex];
-                Debug.Assert(inputDevice != null);
+                string newActionName = $"{action}_{playerNumber}";
+                InputMap.AddAction(newActionName);
 
                 bool isKeyboard = inputDevice.IsKeyboard;
                 var originalEvents = InputMap.ActionGetEvents(action);
@@ -88,9 +98,11 @@ public partial class InputManager : Node
                     }
 
                     var newInputEvent = (InputEvent)inputEvent.Duplicate();
-                    newInputEvent.Device = playerIndex;
+                    newInputEvent.Device = deviceIndex;
                     InputMap.ActionAddEvent(newActionName, newInputEvent);
                 }
+
+                playerNumber++;
             }
 
             InputMap.EraseAction(action);
@@ -111,7 +123,7 @@ public partial class InputManager : Node
 
         _isMultiplayerMappingActive = true;
 
-        LogInfo($"Setting multiplayer mapping for {playerCount} players!");
+        LogInfo($"Set multiplayer mapping for {playerCount} players!");
     }
 
     public void ResetMapping()

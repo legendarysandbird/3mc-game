@@ -34,9 +34,10 @@ public partial class GameManager : Node
 
         _playerMode = playerMode;
 
+        int numberOfPlayers = 1;
         if (playerMode == PlayerMode.LocalMultiplayer)
         {
-            const int numberOfPlayers = 2;
+            numberOfPlayers = 2;
 
             var inputManager = InputManager.Instance;
             int connectedDeviceCount = inputManager.GetConnectedDeviceCount();
@@ -51,7 +52,9 @@ public partial class GameManager : Node
             }
         }
 
-        Node tempLevel = _sceneTempLevel.Instantiate();
+        Level tempLevel = _sceneTempLevel.Instantiate<Level>();
+        tempLevel.Init(numberOfPlayers);
+
         GetTree().Root.AddChild(tempLevel);
 
         _mainMenu.QueueFree();
