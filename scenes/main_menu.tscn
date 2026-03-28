@@ -7,48 +7,88 @@ layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
-offset_right = 4.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_l6cm7")
 
 [node name="Background" type="ColorRect" parent="." unique_id=140905938]
-layout_mode = 0
-offset_left = -1.0
-offset_top = -429.0
-offset_right = 2294.0
-offset_bottom = 648.0
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
 color = Color(0.3372549, 0.64705884, 0.83137256, 1)
 
-[node name="3MC Game" type="Label" parent="." unique_id=393535143]
-layout_mode = 0
-offset_left = 823.0
-offset_top = -370.0
-offset_right = 1492.0
-offset_bottom = -195.0
+[node name="VBoxContainer" type="VBoxContainer" parent="Background" unique_id=955033390]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.05
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -334.0
+offset_right = 334.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="3MC Game" type="Label" parent="Background/VBoxContainer" unique_id=393535143]
+custom_minimum_size = Vector2(0, 220)
+layout_mode = 2
 theme_override_font_sizes/font_size = 128
 text = "3MC Game"
+horizontal_alignment = 1
 
-[node name="PLAY" type="Button" parent="." unique_id=293556355]
-layout_mode = 0
-offset_left = 950.0
-offset_top = 411.0
-offset_right = 1357.0
-offset_bottom = 507.0
-theme_override_font_sizes/font_size = 64
-text = "PLAY"
+[node name="Panels" type="VBoxContainer" parent="Background/VBoxContainer" unique_id=628732462]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 3
 
-[node name="SeedEdit" type="LineEdit" parent="." unique_id=1204272760]
-layout_mode = 0
-offset_left = 971.0
-offset_top = 218.0
-offset_right = 1338.0
-offset_bottom = 271.0
+[node name="MainPanel" type="VBoxContainer" parent="Background/VBoxContainer/Panels" unique_id=432175950]
+layout_mode = 2
+
+[node name="SeedEdit" type="LineEdit" parent="Background/VBoxContainer/Panels/MainPanel" unique_id=1204272760]
+layout_mode = 2
 theme_override_font_sizes/font_size = 32
-placeholder_text = "enter seed"
+placeholder_text = "Enter seed"
 alignment = 1
 max_length = 10
 
-[node name="Camera2D" type="Camera2D" parent="." unique_id=1024741284]
-position = Vector2(1147.6687, 110.18517)
-zoom = Vector2(0.5, 0.6)
+[node name="Singleplayer" type="Button" parent="Background/VBoxContainer/Panels/MainPanel" unique_id=293556355]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Singleplayer"
+
+[node name="LocalMultiplayer" type="Button" parent="Background/VBoxContainer/Panels/MainPanel" unique_id=1094971995]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Local Multiplayer
+"
+
+[node name="Settings" type="Button" parent="Background/VBoxContainer/Panels/MainPanel" unique_id=188295276]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Settings"
+
+[node name="SettingsPanel" type="VBoxContainer" parent="Background/VBoxContainer/Panels" unique_id=302979379]
+visible = false
+layout_mode = 2
+
+[node name="MouseAndKeyboard" type="CheckBox" parent="Background/VBoxContainer/Panels/SettingsPanel" unique_id=1260599981]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 40
+button_pressed = true
+text = "Disable Mouse & Keyboard"
+
+[node name="Back" type="Button" parent="Background/VBoxContainer/Panels/SettingsPanel" unique_id=118040466]
+custom_minimum_size = Vector2(60, 0)
+layout_mode = 2
+theme_override_font_sizes/font_size = 64
+text = "Back"

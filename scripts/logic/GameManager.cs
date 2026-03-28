@@ -3,12 +3,20 @@ using Godot;
 
 public partial class GameManager : Node
 {
+    public enum PlayerMode
+    {
+        SinglePlayer,
+        LocalMultiplayer
+    }
+
     public const string CurrentSeedEntry = "currentSeed";
 
     private PackedScene? _sceneTempLevel;
     private MainMenu? _mainMenu;
 
     private readonly Dictionary<string, int> _gameInfo = new Dictionary<string, int> { { CurrentSeedEntry, 0 } };
+
+    private PlayerMode _playerMode;
 
     public override void _Ready()
     {
@@ -19,12 +27,34 @@ public partial class GameManager : Node
         _mainMenu.PlayPressed += OnMainMenuPlayPressed;
     }
 
-    private void OnMainMenuPlayPressed()
+    private void OnMainMenuPlayPressed(PlayerMode playerMode)
     {
         _sceneTempLevel.NotNull(nameof(_sceneTempLevel));
         _mainMenu.NotNull(nameof(_mainMenu));
 
-        Node tempLevel = _sceneTempLevel.Instantiate();
+        _playerMode = playerMode;
+
+        int numberOfPlayers = 1;
+        if (playerMode == PlayerMode.LocalMultiplayer)
+        {
+            numberOfPlayers = 2;
+
+            var inputManager = InputManager.Instance;
+            int connectedDeviceCount = inputManager.GetConnectedDeviceCount();
+            if (connectedDeviceCount >= numberOfPlayers)
+            {
+                inputManager.SetMultiplayerMapping(numberOfPlayers);
+            }
+            else
+            {
+                Logger.Info($"Not enough devices connected! Attempted player count: {numberOfPlayers}. Connected device count: {connectedDeviceCount}.");
+                return;
+            }
+        }
+
+        Level tempLevel = _sceneTempLevel.Instantiate<Level>();
+        tempLevel.Init(numberOfPlayers);
+
         GetTree().Root.AddChild(tempLevel);
 
         _mainMenu.QueueFree();
