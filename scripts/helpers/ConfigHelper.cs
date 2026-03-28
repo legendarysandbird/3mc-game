@@ -15,7 +15,7 @@ public static class ConfigHelper
         config.SetValue(section, key, value);
         config.Save(path);
 
-        GD.Print($"Setting {key} to {value}!");
+        Logger.Info($"Setting {key} to {value}!");
     }
 
     public static Variant GetValue(string path, string key, Variant defaultValue, string section = "")
