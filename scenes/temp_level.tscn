@@ -2,7 +2,6 @@
 
 [ext_resource type="Script" uid="uid://b00v5ermbca2r" path="res://scripts/logic/Level.cs" id="1_h517g"]
 [ext_resource type="Texture2D" uid="uid://cxlm3j5d8v1hh" path="res://assets/level/tilesheet_complete.png" id="2_ka4wd"]
-[ext_resource type="Script" uid="uid://da3ogon0kv0y1" path="res://scripts/logic/PlayerSpawner.cs" id="2_vcli0"]
 [ext_resource type="PackedScene" uid="uid://b0u1ljkfsmaog" path="res://scenes/score_counter.tscn" id="4_7hwuv"]
 [ext_resource type="PackedScene" uid="uid://ch15dovngqxm3" path="res://scenes/enemy_director.tscn" id="4_kxde3"]
 [ext_resource type="PackedScene" uid="uid://btkb1qqfhvymi" path="res://scenes/enemy.tscn" id="4_vcli0"]
@@ -361,10 +360,7 @@ rotation = 1.9178056
 position = Vector2(1148.6687, 77.18517)
 zoom = Vector2(0.5, 0.6)
 
-[node name="Players" type="Node" parent="." unique_id=585701839 node_paths=PackedStringArray("_spawnPoints")]
-script = ExtResource("2_vcli0")
-_spawnPoints = [NodePath("PlayerSpawnAnchors/Spawn1"), NodePath("PlayerSpawnAnchors/Spawn2")]
-metadata/_custom_type_script = "uid://da3ogon0kv0y1"
+[node name="Players" type="Node" parent="." unique_id=1495921069]
 
 [node name="PlayerSpawnAnchors" type="Node" parent="Players" unique_id=455279548]
 
