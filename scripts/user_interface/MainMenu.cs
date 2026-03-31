@@ -2,8 +2,11 @@ using Godot;
 
 public partial class MainMenu : Node
 {
-    [Signal] public delegate void PlayPressedEventHandler();
-    [Signal] public delegate void SeedSetEventHandler(int newSeed);
+    [Signal]
+    public delegate void PlayPressedEventHandler();
+
+    [Signal]
+    public delegate void SeedSetEventHandler(int newSeed);
 
     private Button? _buttonPlay;
     private LineEdit? _seedEdit;

@@ -3,10 +3,14 @@ using Godot;
 [GlobalClass]
 public partial class Enemy : CharacterBody2D
 {
-    [Export] private float _speed = 100.0f;
-    [Export] private int _contactDamage = 1;
+    [Export]
+    private float _speed = 100.0f;
 
-    [Signal] public delegate void EnemyDeathEventHandler();
+    [Export]
+    private int _contactDamage = 1;
+
+    [Signal]
+    public delegate void EnemyDeathEventHandler();
 
     private VisibleOnScreenNotifier2D? _visibilityNotifier;
     private Area2D? _hitbox;
@@ -16,10 +20,14 @@ public partial class Enemy : CharacterBody2D
 
     public override void _Ready()
     {
-        _visibilityNotifier = GetNode<VisibleOnScreenNotifier2D>("VisibleOnScreenNotifier2D").NotNull(nameof(_visibilityNotifier));
+        _visibilityNotifier = GetNode<VisibleOnScreenNotifier2D>("VisibleOnScreenNotifier2D")
+            .NotNull(nameof(_visibilityNotifier));
         _hitbox = GetNode<Area2D>("Hitbox").NotNull(nameof(_hitbox));
         _healthPool = GetNode<Health>("Health").NotNull(nameof(_healthPool));
-        _player = (Player)GetTree().Root.FindChildren("*", nameof(Player), true, false)[0].NotNull(nameof(_player));
+        _player = (Player)
+            GetTree()
+                .Root.FindChildren("*", nameof(Player), true, false)[0]
+                .NotNull(nameof(_player));
 
         _hitbox.AreaEntered += OnHitboxAreaEntered;
         _healthPool.HealthEmpty += OnHealthPoolEmpty;

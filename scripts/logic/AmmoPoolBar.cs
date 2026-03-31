@@ -2,8 +2,8 @@ using Godot;
 
 public partial class AmmoPoolBar : ProgressBar
 {
-
-    [Export] private AmmoPool? _ammoPool;
+    [Export]
+    private AmmoPool? _ammoPool;
 
     public override void _Ready()
     {

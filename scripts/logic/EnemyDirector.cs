@@ -4,15 +4,20 @@ using Godot;
 [GlobalClass]
 public partial class EnemyDirector : Node
 {
-    [Export] private Godot.Collections.Array<PackedScene>? _mobTypes;
-    [Export] private PathFollow2D? _spawnNode;
-    [Export] private int _maxMobCount;
+    [Export]
+    private Godot.Collections.Array<PackedScene>? _mobTypes;
+
+    [Export]
+    private PathFollow2D? _spawnNode;
+
+    [Export]
+    private int _maxMobCount;
 
     private Timer? _spawnTimer;
     private int _curMobCount;
 
-
-    [Signal] public delegate void EnemyDeathEventHandler();
+    [Signal]
+    public delegate void EnemyDeathEventHandler();
 
     public override void _Ready()
     {

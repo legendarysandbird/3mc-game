@@ -2,7 +2,8 @@ using Godot;
 
 public partial class ScoreCounter : Label
 {
-    [Export] private EnemyDirector? _enemyDirector;
+    [Export]
+    private EnemyDirector? _enemyDirector;
 
     private int _score;
 

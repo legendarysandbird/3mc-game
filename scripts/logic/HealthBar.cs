@@ -2,7 +2,8 @@ using Godot;
 
 public partial class HealthBar : ProgressBar
 {
-    [Export] private Health? _healthPool;
+    [Export]
+    private Health? _healthPool;
 
     public override void _Ready()
     {

@@ -2,7 +2,8 @@ using Godot;
 
 public partial class EnemyAnimation : AnimatedSprite2D
 {
-    [Export] private CharacterBody2D? _enemy;
+    [Export]
+    private CharacterBody2D? _enemy;
 
     public override void _Ready()
     {
