@@ -3,12 +3,20 @@ using Godot;
 [GlobalClass]
 public partial class Player : CharacterBody2D
 {
-    private readonly float _gravity = (float)ProjectSettings.GetSetting("physics/2d/default_gravity");
+    private readonly float _gravity = (float)
+        ProjectSettings.GetSetting("physics/2d/default_gravity");
 
-    [Export] private float _moveSpeed;
-    [Export] private float _jumpVelocity;
-    [Export] private int _rotationSpeed;
-    [Export] private float _projectileSpeed;
+    [Export]
+    private float _moveSpeed;
+
+    [Export]
+    private float _jumpVelocity;
+
+    [Export]
+    private int _rotationSpeed;
+
+    [Export]
+    private float _projectileSpeed;
 
     private Node2D? _armNode;
     private Node2D? _projectileSpawnNode;
@@ -22,11 +30,11 @@ public partial class Player : CharacterBody2D
 
     public Vector2 ProjectileDirection { get; private set; }
 
-
     public override void _Ready()
     {
         _armNode = GetNode<Node2D>("AnimatedSprite2D/Arm").NotNull(nameof(_projectileSpawnNode));
-        _projectileSpawnNode = GetNode<Node2D>("AnimatedSprite2D/Arm/ProjectileSpawnPoint").NotNull(nameof(_projectileSpawnNode));
+        _projectileSpawnNode = GetNode<Node2D>("AnimatedSprite2D/Arm/ProjectileSpawnPoint")
+            .NotNull(nameof(_projectileSpawnNode));
         _hitbox = GetNode<Area2D>("Hitbox").NotNull(nameof(_hitbox));
         _healthPool = GetNode<Health>("Health").NotNull(nameof(_healthPool));
         _ammoPool = GetNode<AmmoPool>("AmmoPool").NotNull(nameof(_ammoPool));
@@ -104,7 +112,10 @@ public partial class Player : CharacterBody2D
 
         _gunTimer.Start();
 
-        Projectile projectile = Projectile.Create(_projectileSpawnNode.GlobalPosition, ProjectileDirection * _projectileSpeed);
+        Projectile projectile = Projectile.Create(
+            _projectileSpawnNode.GlobalPosition,
+            ProjectileDirection * _projectileSpeed
+        );
 
         GetTree().Root.AddChild(projectile);
         _ammoPool.ChangeAmmoPoolValue(-1);
@@ -121,7 +132,12 @@ public partial class Player : CharacterBody2D
             _mousePosition = mousePosition;
         }
 
-        var stickDirection = Input.GetVector("player_aim_left", "player_aim_right", "player_aim_up", "player_aim_down");
+        var stickDirection = Input.GetVector(
+            "player_aim_left",
+            "player_aim_right",
+            "player_aim_up",
+            "player_aim_down"
+        );
         if (_stickDirection != stickDirection)
         {
             projectileDirection = stickDirection;

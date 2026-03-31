@@ -8,11 +8,15 @@ public partial class GameManager : Node
     private PackedScene? _sceneTempLevel;
     private MainMenu? _mainMenu;
 
-    private readonly Dictionary<string, int> _gameInfo = new Dictionary<string, int> { { CurrentSeedEntry, 0 } };
+    private readonly Dictionary<string, int> _gameInfo = new Dictionary<string, int>
+    {
+        { CurrentSeedEntry, 0 },
+    };
 
     public override void _Ready()
     {
-        _sceneTempLevel = GD.Load<PackedScene>("uid://chvfto1w6w3um").NotNull(nameof(_sceneTempLevel));
+        _sceneTempLevel = GD.Load<PackedScene>("uid://chvfto1w6w3um")
+            .NotNull(nameof(_sceneTempLevel));
         _mainMenu = GetNode<MainMenu>("Main Menu").NotNull(nameof(_mainMenu));
 
         _mainMenu.SeedSet += OnMainMenuSeedSet;

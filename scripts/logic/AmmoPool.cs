@@ -3,9 +3,11 @@ using Godot;
 
 public partial class AmmoPool : Node
 {
-    [Export] public int MaxAmmo;
+    [Export]
+    public int MaxAmmo;
 
-    [Signal] public delegate void AmmoPoolValueChangedEventHandler();
+    [Signal]
+    public delegate void AmmoPoolValueChangedEventHandler();
 
     public int AmmoPoolValue;
     private Timer? _ammoReplenishTimer;
@@ -15,9 +17,9 @@ public partial class AmmoPool : Node
         Debug.Assert(MaxAmmo > 0);
         AmmoPoolValue = MaxAmmo;
 
-        _ammoReplenishTimer = GetNode<Timer>("AmmoReplenishTimer").NotNull(nameof(_ammoReplenishTimer));
+        _ammoReplenishTimer = GetNode<Timer>("AmmoReplenishTimer")
+            .NotNull(nameof(_ammoReplenishTimer));
         _ammoReplenishTimer.Timeout += OnAmmoReplenishTimerTimeout;
-
     }
 
     public override void _Process(double delta)

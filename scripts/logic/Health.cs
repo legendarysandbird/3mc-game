@@ -3,10 +3,14 @@ using Godot;
 
 public partial class Health : Node
 {
-    [Export] public int MaxHealth;
+    [Export]
+    public int MaxHealth;
 
-    [Signal] public delegate void HealthEmptyEventHandler();
-    [Signal] public delegate void HealthPoolChangedEventHandler();
+    [Signal]
+    public delegate void HealthEmptyEventHandler();
+
+    [Signal]
+    public delegate void HealthPoolChangedEventHandler();
 
     public int HealthPool;
 

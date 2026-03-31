@@ -3,8 +3,12 @@ using Godot;
 public partial class PlayerAnimation : AnimatedSprite2D
 {
     private float _xScaleCache;
-    [Export] private Node2D? _armNode;
-    [Export] private Player? _playerNode;
+
+    [Export]
+    private Node2D? _armNode;
+
+    [Export]
+    private Player? _playerNode;
 
     public override void _Ready()
     {
